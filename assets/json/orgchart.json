@@ -1,0 +1,610 @@
+[
+   [
+      {
+         "employee_id": "8105",
+         "name": "Brianna Alvarez",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8397",
+         "name": "Courtney Birdow-Davis",
+         "supervisor_id": "8391",
+         "role": "HR Recruiter"
+      }
+   ],
+   [
+      {
+         "employee_id": "8416",
+         "name": "Diane Blow",
+         "supervisor_id": "8036",
+         "role": "Insurance Services Representative"
+      }
+   ],
+   [
+      {
+         "employee_id": "8435",
+         "name": "Tyisha Bradford",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8443",
+         "name": "Jacquese Brown",
+         "supervisor_id": "8036",
+         "role": "Insurance Services Representative"
+      }
+   ],
+   [
+      {
+         "employee_id": "8444",
+         "name": "Patriceia Casher",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8419",
+         "name": "Ameer Younus Choonara",
+         "supervisor_id": "8223",
+         "role": "Negotiator"
+      }
+   ],
+   [
+      {
+         "employee_id": "8234",
+         "name": "Christina Davis",
+         "supervisor_id": "8223",
+         "role": "Client Service Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8393",
+         "name": "Denisha Day-Criss",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist III"
+      }
+   ],
+   [
+      {
+         "employee_id": "8430",
+         "name": "Trisha Fischer",
+         "supervisor_id": "8432",
+         "role": "Receptionist"
+      }
+   ],
+   [
+      {
+         "employee_id": "8300",
+         "name": "Alexis Garcia",
+         "supervisor_id": "8223",
+         "role": "Corporate Trainer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8380",
+         "name": "Karina Garcia",
+         "supervisor_id": "8168",
+         "role": "Graphic Designer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8414",
+         "name": "Amber Garza",
+         "supervisor_id": "8426",
+         "role": "Medical Records Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8422",
+         "name": "India Gates",
+         "supervisor_id": "8168",
+         "role": "Executive Assistant"
+      }
+   ],
+   [
+      {
+         "employee_id": "8387",
+         "name": "Yesenia Gonzalez",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8427",
+         "name": "Tatyana Griffin",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8428",
+         "name": "Taylor Hall",
+         "supervisor_id": "8168",
+         "role": "Salesforce Business Analyst"
+      }
+   ],
+   [
+      {
+         "employee_id": "8331",
+         "name": "Salam Hammoud",
+         "supervisor_id": "8223",
+         "role": "Intake Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8391",
+         "name": "Randall Hanks",
+         "supervisor_id": "8168",
+         "role": "Human Resources Generalist"
+      }
+   ],
+   [
+      {
+         "employee_id": "8156",
+         "name": "Jonathan Harris",
+         "supervisor_id": "8168",
+         "role": "Attorney"
+      }
+   ],
+   [
+      {
+         "employee_id": "8436",
+         "name": "Chyna Henderson",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8365",
+         "name": "Jamayla Hickey",
+         "supervisor_id": "8036",
+         "role": "Insurance Service Representative"
+      }
+   ],
+   [
+      {
+         "employee_id": "8426",
+         "name": "Felicia Hurt",
+         "supervisor_id": "8223",
+         "role": "Medical Records Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8440",
+         "name": "Haleigh Ickes",
+         "supervisor_id": "8006",
+         "role": "Legal Assistant"
+      }
+   ],
+   [
+      {
+         "employee_id": "8278",
+         "name": "Antonia James",
+         "supervisor_id": "8426",
+         "role": "Medical Records Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8366",
+         "name": "Melissa Jones",
+         "supervisor_id": "8156",
+         "role": "Litigation Medical Records Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8276",
+         "name": "Chase Lee",
+         "supervisor_id": "8168",
+         "role": "Video Production Specialist"
+      }
+   ],
+   [
+      {
+         "employee_id": "8373",
+         "name": "Linda Montejano",
+         "supervisor_id": "8331",
+         "role": "Senior Legal Intake Specialist I"
+      }
+   ],
+   [
+      {
+         "employee_id": "8294",
+         "name": "Wynnesha Moultrie",
+         "supervisor_id": "8432",
+         "role": "Mail Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8079",
+         "name": "Lanie Nation",
+         "supervisor_id": "8223",
+         "role": "Closing Assistant"
+      }
+   ],
+   [
+      {
+         "employee_id": "8037",
+         "name": "Ian Nelsen",
+         "supervisor_id": "8223",
+         "role": "Attorney"
+      }
+   ],
+   [
+      {
+         "employee_id": "8287",
+         "name": "Nishad Noorudeen",
+         "supervisor_id": "8168",
+         "role": "Development Team Lead"
+      }
+   ],
+   [
+      {
+         "employee_id": "8003",
+         "name": "Crystal Ovalle",
+         "supervisor_id": "8036",
+         "role": "Insurance Services Representative"
+      }
+   ],
+   [
+      {
+         "employee_id": "8364",
+         "name": "Mariah Ozuna",
+         "supervisor_id": "8156",
+         "role": "Litigation Attorney"
+      }
+   ],
+   [
+      {
+         "employee_id": "8293",
+         "name": "Rebeca Pacheco",
+         "supervisor_id": "111",
+         "role": "Assistant Bookkeeper"
+      }
+   ],
+   [
+      {
+         "employee_id": "8424",
+         "name": "Karen Padron",
+         "supervisor_id": "8223",
+         "role": "Provider Liaison"
+      }
+   ],
+   [
+      {
+         "employee_id": "8379",
+         "name": "Savitha Panchanatham",
+         "supervisor_id": "8168",
+         "role": "Salesforce Developer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8388",
+         "name": "Gage Parker",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8334",
+         "name": "Berenice Pena",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8316",
+         "name": "Bryan Perez",
+         "supervisor_id": "8223",
+         "role": "Closing Assistant"
+      }
+   ],
+   [
+      {
+         "employee_id": "8434",
+         "name": "Wade Phelps",
+         "supervisor_id": "8168",
+         "role": "Digital Media Buyer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8400",
+         "name": "Edwin Ponce",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8168",
+         "name": "Kelly Powers",
+         "supervisor_id": "8008",
+         "role": "Managing Attorney"
+      }
+   ],
+   [
+      {
+         "employee_id": "8413",
+         "name": "Venkata Sri Ram Chand Pyda",
+         "supervisor_id": "8432",
+         "role": "IT Support Specialist"
+      }
+   ],
+   [
+      {
+         "employee_id": "8432",
+         "name": "Amy Quiroga",
+         "supervisor_id": "8223",
+         "role": "Office Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8423",
+         "name": "Charles Regalado",
+         "supervisor_id": "8223",
+         "role": "Pre-Litigation Attorney"
+      }
+   ],
+   [
+      {
+         "employee_id": "8433",
+         "name": "Samantha Rich",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8005",
+         "name": "Daisy Rocha",
+         "supervisor_id": "8168",
+         "role": "Marketing Associate"
+      }
+   ],
+   [
+      {
+         "employee_id": "8398",
+         "name": "Arleah Rose",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8036",
+         "name": "Xiomara Ross",
+         "supervisor_id": "8223",
+         "role": "Insurance Service Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8223",
+         "name": "Erin Sacks",
+         "supervisor_id": "8168",
+         "role": "Chief Operating Officer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8386",
+         "name": "Tynisha Simpson",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8343",
+         "name": "Oluwaseun Sodimu",
+         "supervisor_id": "8168",
+         "role": "Web Developer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8441",
+         "name": "Colette Starks",
+         "supervisor_id": "8006",
+         "role": "Client Relations Coordinator"
+      }
+   ],
+   [
+      {
+         "employee_id": "8363",
+         "name": "Maretta Stewart",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8357",
+         "name": "Alanis Tavarez",
+         "supervisor_id": "8223",
+         "role": "Closing Assistant"
+      }
+   ],
+   [
+      {
+         "employee_id": "111",
+         "name": "Erin Taylor",
+         "supervisor_id": "8168",
+         "role": "Bookkeeper"
+      }
+   ],
+   [
+      {
+         "employee_id": "8425",
+         "name": "Yaquisha Thompson",
+         "supervisor_id": "8432",
+         "role": "Mail Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8006",
+         "name": "Nancy Tinoco",
+         "supervisor_id": "8223",
+         "role": "Senior Client Relations Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8008",
+         "name": "Michael Uvalle",
+         "supervisor_id": "",
+         "role": "Owner"
+      }
+   ],
+   [
+      {
+         "employee_id": "8446",
+         "name": "Lakeshia Choice",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ],
+   [
+      {
+         "employee_id": "8449",
+         "name": "Xochilt Carrillo",
+         "supervisor_id": "8426",
+         "role": "Medical Records Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8450",
+         "name": "Kaylee Grooms-Knox",
+         "supervisor_id": "8432",
+         "role": "Mail Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8448",
+         "name": "Amani Ingram",
+         "supervisor_id": "8223",
+         "role": "Negotiator"
+      }
+   ],
+   [
+      {
+         "employee_id": "8452",
+         "name": "Cindi Veldanez",
+         "supervisor_id": "8432",
+         "role": "Receptionist"
+      }
+   ],
+   [
+      {
+         "employee_id": "8451",
+         "name": "Ashley Wunder",
+         "supervisor_id": "8300",
+         "role": "Technical Writer"
+      }
+   ],
+   [
+      {
+         "employee_id": "8463",
+         "name": "Patrice Johnson",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist I"
+      }
+   ],
+   [
+      {
+         "employee_id": "8458",
+         "name": "Stephanie Avalos",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist I"
+      }
+   ],
+   [
+      {
+         "employee_id": "8454",
+         "name": "Megan Brackett",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8457",
+         "name": "Hadiisha Butts",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist II"
+      }
+   ],
+   [
+      {
+         "employee_id": "8459",
+         "name": "Diyanechea Dorsey",
+         "supervisor_id": "8036",
+         "role": "Insurance Services Representative"
+      }
+   ],
+   [
+      {
+         "employee_id": "8465",
+         "name": "Taneisha Jones",
+         "supervisor_id": "8036",
+         "role": "Insurance Services Representative"
+      }
+   ],
+   [
+      {
+         "employee_id": "8456",
+         "name": "Brittney Price",
+         "supervisor_id": "8426",
+         "role": "Medical Records Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8464",
+         "name": "Roque Juarez Martinez",
+         "supervisor_id": "8426",
+         "role": "Medical Records Clerk"
+      }
+   ],
+   [
+      {
+         "employee_id": "8466",
+         "name": "Sydney Rollins",
+         "supervisor_id": "8331",
+         "role": "Legal Intake Specialist I"
+      }
+   ],
+   [
+      {
+         "employee_id": "8467",
+         "name": "Agustin Cuevas",
+         "supervisor_id": "8234",
+         "role": "Case Manager"
+      }
+   ]
+]

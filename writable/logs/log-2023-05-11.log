@@ -1,0 +1,32 @@
+CRITICAL - 2023-05-11 08:15:18 --> ftp_get(): PORT subcommand request successful.
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get(): PORT...', 'C:\\xampp_\\htdoc...', 30)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(30): ftp_get(Resource id #129, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-05-11 11:28:45 --> ftp_get():  Unable to find file /logimaxedi/Speedo/picking/fcst0016_05-11-12:00.CSV
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get():  Una...', 'C:\\xampp_\\htdoc...', 30)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(30): ftp_get(Resource id #129, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-05-11 11:28:51 --> ftp_get():  Unable to find file /logimaxedi/Speedo/picking/fcst0016_05-11-12:00.CSV
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get():  Una...', 'C:\\xampp_\\htdoc...', 30)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(30): ftp_get(Resource id #129, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-05-11 11:32:46 --> ftp_get(): PORT subcommand request successful.
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get(): PORT...', 'C:\\xampp_\\htdoc...', 30)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(30): ftp_get(Resource id #129, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}
