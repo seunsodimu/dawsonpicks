@@ -1438,18 +1438,18 @@ public function create_picks_table($array, $interval, $pickers, $start, $end, $d
     $display1 = "";
     $total_hrs=0;
     $total_avg =0;
-    $display1 .="<table style='margin-top: 80px' border=1 cellspacing=0 cellpadding=0 width='50%'><thead><tr><th>Selector</th><th>Avg/hr</th><th>Hours</th><th>Total Picks</th></tr></thead><tbody>";
+    $display1 .="<table style='margin-top: 80px' border=1 cellspacing=0 cellpadding=0 width='50%'><thead><tr align='center'><th>Selector</th><th align='center'>Avg/hr</th><th align='center'>Hours</th><th align='center'>Total Picks</th></tr></thead><tbody>";
     $tot_hr = 0;
     $tot_pic = 0;
     foreach($pickers as $picker){
         $display1 .="<tr>";
         $display1 .="<td>".$picker."</td>";
         $res = $this->pickerHoursWorked($picker, $interval, $fTime, $tTime, $sDate, $type, $docType, $cust);
-        $display1 .="<td>".$res['avg_hr']."</td>";
-        $display1 .="<td>".$res['hours']."</td>";
+        $display1 .="<td align='center'>".$res['avg_hr']."</td>";
+        $display1 .="<td align='center'>".$res['hours']."</td>";
         $tot_hr = $tot_hr + $res['hours'];
         $tot_pic = $tot_pic + $res['total'];
-        $display1 .="<td>".$res['total']."</td>";
+        $display1 .="<td align='center'>".$res['total']."</td>";
         $display1 .="</tr>";
     }
     if(($tot_pic>0) && ($tot_hr > 0)){
@@ -1458,7 +1458,7 @@ public function create_picks_table($array, $interval, $pickers, $start, $end, $d
 }else{
     $avg_per_hr =0;
 }
-    $display1 .="</tbody><tfoot><tr><th>Totals</th><th>".$avg_per_hr."</th><th>".$tot_hr."</th><th>".$tot_pic."</th></tr></tfoot></table>";
+    $display1 .="<tr><td><strong>Totals</strong></td><td align='center'><strong>".$avg_per_hr."</strong></td><td align='center'><strong>".$tot_hr."</strong></td><td align='center'><strong>".$tot_pic."</strong></td></tr></tbody></table>";
         return $display1;
     }
   
