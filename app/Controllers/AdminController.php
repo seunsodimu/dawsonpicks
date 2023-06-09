@@ -650,7 +650,7 @@ $email->addTo($to, $to_name);
 // $email->addCc('jim.lafoe@dawsonlogistics.com', 'Jim Lafoe');
 // $email->addCc('brooksb@dawsonlogistics.com', 'Brooks Bennett-Miller');
 // $email->addCc('ander.cruz@dawsonlogistics.com', 'Ander Cruz');
- $email->addCc('dennisb@dawsonlogistics.com', 'Dennis Brinkhus');
+ //$email->addCc('dennisb@dawsonlogistics.com', 'Dennis Brinkhus');
  //$email->addCc('seun.sodimu@gmail.com', 'Seun Sodimu');
 //$email->addCc('', 'DL Speedo Team');
 $email->addContent(
@@ -750,7 +750,7 @@ function sendMailIN() {
         $mailset = json_decode($mail_settings[0]->settings, true); 
         $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
      //  $mailset['Interval'] =15;
-      //  $displayDate = "2023-05-04";
+     $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
      $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
@@ -817,12 +817,12 @@ function sendMailIN() {
     // echo $displayDate."<br>";
     if($this->request->getVar()['view'] == 'email'){
         $subject = $cust." KPI report for ".$displayDate;
-        $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=view&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
+        $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
         $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
-   $this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
-     // $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
-      // $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
-      // $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
+  // $this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
+   //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
+    //  $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
+       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
         }elseif($this->request->getVar()['view'] == 'pdf'){
             $html = $top;
             $html .=$table_head;
@@ -1167,7 +1167,7 @@ public function mailReportTest()
         $mailset = json_decode($mail_settings[0]->settings, true); 
        $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
       // $mailset['Interval'] =15;
-       //  $displayDate = "2023-05-11";
+         $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
      $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
@@ -1239,12 +1239,12 @@ public function mailReportTest()
     // echo $displayDate."<br>";
      if($this->request->getVar()['view'] == 'email'){
      $subject = $cust." KPI report for ".$displayDate;
-     $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=view&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
+     $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
-$this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
-  //  $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
-  //  $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
-  //  $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
+//$this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
+ //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
+//    $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
+    $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
         $html .=$table_head;
@@ -1278,6 +1278,20 @@ $this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlsp
         $html .=$summary;
         $html .=$bottom;
         echo $html;
+        echo "<table style='margin-top: 80px' border=1 cellspacing=0 cellpadding=0 width='50%'>";
+    echo "<tr><th>Picker</th><th>Average Picks per Hour</th><th>Total Hours Worked</th><th>Total Picks</th></tr>";
+    $totAvg1 =0;
+    $totHr1 =0;
+    $totPicks1 =0;
+        foreach($pickers as $picker):
+            $pickData = $this->calculatePickerStats($array, $picker, $displayDate);
+            echo "<tr><td>".$picker."</td><td>".round($pickData['avg'], 2)."</td><td>".round($pickData['hours'], 2)."</td><td>".$pickData['total']."</td></tr>";
+            $totAvg1 = $totAvg1 + $pickData['avg'];
+            $totHr1 = $totHr1 + $pickData['hours'];
+            $totPicks1 = $totPicks1 + $pickData['total'];    
+        endforeach;
+        echo "<tr><th>Totals</th><th>".round($totAvg1, 2)."</th><th>".round($totHr1, 2)."</th><th>".$totPicks1."</th></tr>";
+        echo "</table>";
     }
 }
 
@@ -1462,4 +1476,39 @@ public function create_picks_table($array, $interval, $pickers, $start, $end, $d
         return $display1;
     }
   
+
+
+public function calculatePickerStats($data, $picker, $date)
+{
+    // Filter the data for the specified picker and date
+    $filteredData = array_filter($data, function ($item) use ($picker, $date) {
+        return $item->picker == $picker && $item->start_date == $date;
+    });
+
+    // Calculate the total picks and total hours
+    $totalPicks = 0;
+    $totalHours = 0;
+
+    foreach ($filteredData as $item) {
+        $startDateTime = new \DateTime($item->start_date . ' ' . $item->start_time);
+        $completeDateTime = new \DateTime($item->complete_date . ' ' . $item->complete_time);
+        $interval = $startDateTime->diff($completeDateTime);
+
+        $totalPicks ++;
+        $totalHours += $interval->h + ($interval->i / 60); // Convert minutes to hours
+    }
+
+    // Calculate the average pick per hour
+    $averagePickPerHour = ($totalHours!=0) ?$totalPicks / $totalHours:0;
+    $data = array(
+        'picker' => $picker,
+        'date' => $date,
+        'avg' => $averagePickPerHour,
+        'hours' => $totalHours,
+        'total' => $totalPicks
+    );
+    return $data;
+}
+
+
 }
