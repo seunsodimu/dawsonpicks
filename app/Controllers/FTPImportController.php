@@ -15,18 +15,20 @@ class FTPImportController extends BaseController
 
 $ftp_username = "SPEEDO";
 $ftp_userpass = "Tech5633";
-$ftp_server = "172.28.208.10";
-//$ftp_server = "199.19.210.20"; //public
-//$ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", "", "KPI Upload Error"));
-$ftp_conn = ftp_connect($ftp_server) or die(" Could not connect to ".$ftp_server);
+//$ftp_server = "172.28.208.10";
+$ftp_server = "199.19.210.20"; //public
+$ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", "", "Dawson KPI Upload Issue"));
 $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 $filename = !empty($this->request->getGet('half')) ? "fcst0016_".date('m-d')."-23:30.CSV" : "fcst0016_".date('m-d-H', strtotime('+1 hour')).":00.CSV";
-$filename = "fcst0016_05-11-09:00.CSV";
+//$filename = "fcst0016_06-09-23:30.CSV";
 $local_file = "assets/archive/".$filename;
 //$server_file = "/logimaxedi/Speedo/picking/fcst0016_11-09-22-11:04:01.CSV";
 $server_file = "/logimaxedi/Speedo/picking/".$filename;
-//var_dump( $filename); exit;
+//var_dump( $server_file); exit;
 // download server file
+$file_list = ftp_nlist($ftp_conn, "/logimaxedi/Speedo/picking/");
+//var_dump($file_list); exit;
+if (in_array($server_file, $file_list)) {
 if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
   {
  // echo "Successfully written to $local_file.";
@@ -107,8 +109,16 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
   }
 else
   {
-  $this->notifyAdmin("Error downloading ".$server_file, "developer@seun.me", "","KPI Upload Error");
+  echo "Failed to download the file ".$server_file;
+    $this->notifyAdmin("Failed to download the file ".$server_file, "developer@seun.me", "","Drop File Error");
   }
+}else{
+    $missing_file = str_replace("fcst0016_", "", $filename);
+    $missing_file = str_replace(".CSV", "", $missing_file);
+    $notmsg = "The file does not exist on the FTP server ".$server_file;
+    $notmsg .= "<br>This means the file has not been uploaded to the FTP server yet for the time ".$missing_file;
+    $this->notifyAdmin($notmsg, "developer@seun.me", "DennisB@dawsonlogistics.com","Drop File Error");
+}
 
 // close connection
 ftp_close($ftp_conn);
@@ -208,7 +218,6 @@ session()->setFlashdata('alert_class', 'alert-success');
     public function notifyAdmin($msg, $to1, $to2, $subj)
     {
         $email = \Config\Services::email();
-
 $email->setFrom('report@dawson-reports.com', 'Dawson Reports');
 $email->setTo($to1);
 if(!empty($to2)){
