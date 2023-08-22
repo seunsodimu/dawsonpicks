@@ -795,7 +795,7 @@ function sendMailIN() {
             $table_body .="<tr><td>".$time['start']."</td>";
             $time_count =0;
             foreach($pickers as $picks):
-                $count = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate);
+                $count = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDat, $this->request->getVar()['cust']);
                 $bg = $this->tdColor($count);
                 $table_body .= "<td align='center'".$bg.">".$count."</td>";
                 $time_count = $time_count + $count;
@@ -811,7 +811,7 @@ function sendMailIN() {
         $bg3 = $this->tdColor($tot_count);
         $table_foot .= "<th".$bg3.">".$tot_count."</th>";
         endforeach;
-        $count_allData = $this->totalPickCount($array, $displayDate);
+        $count_allData = $this->totalPickCount($array, $displayDate, $this->request->getVar()['cust']);
         $bg4 = $this->tdColor($count_allData);
         $table_foot .="<th".$bg4.">".$count_allData."</th>";
         $table_foot .="</tr></tfoot></table><br><br><br>";
@@ -864,7 +864,7 @@ function sendMailIN() {
 }
 
 
-    public function pickerCountPerInterval($allData, $picker, $start, $end, $data_time, $local_time, $date)
+    public function pickerCountPerInterval($allData, $picker, $start, $end, $data_time, $local_time, $date, $cust)
     {
         $start = $date." ".$start;
         $end = $date." ".$end;
@@ -892,7 +892,11 @@ function sendMailIN() {
            // $complete->setTimeZone(new \DateTimeZone($data_time)); 
            //var_dump($complete); exit;
             if(($data->picker == $picker) && ($start <= $complete) &&($complete <= $end)){
-                $count ++;
+                if($cust == 2){
+                $count += abs($data->transaction_qty);
+                }else{
+                    $count ++;
+                }
             }
             endforeach;
             return $count;
@@ -926,7 +930,7 @@ function sendMailIN() {
            // $complete->setTimeZone(new \DateTimeZone($data_time)); 
            //var_dump($complete); exit;
             if(($data->picker == $picker) && ($start <= $complete) &&($complete <= $end)){
-                $count += $data->transaction_qty;
+                $count += $data->transaction_qty; var_dump($count);
             }
             endforeach;
             return $count;
@@ -961,7 +965,7 @@ function sendMailIN() {
     
     
     
-    public function summaryTable($pickers, $array, $interval, $timeArray)
+    public function summaryTable($pickers, $array, $interval, $timeArray, $cust)
     {
         $total_avg = 0;
         $totpik = 0;
@@ -976,7 +980,7 @@ $html = '<table style="margin-top: 80px" border=1 cellspacing=0 cellpadding=0 wi
             </tr>';
 
 foreach ($pickers as $picker ) {
-    $total_picks = $this->totalPickCount($array, $picker);
+    $total_picks = $this->totalPickCount($array, $picker, $cust);
     $avgPicks = $this->avgCountPerInterval($total_picks, $interval);
     $blocks = $this->timeBlocksWorked($array, $picker, $timeArray);
     $html .= '<tr>';
@@ -1241,7 +1245,7 @@ public function mailReportTest()
             $table_body .="<tr><td>".$picks."</td>";
             $time_count =0;
             foreach($times as $time):
-                $count = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate);
+                $count = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate, $this->request->getVar()['cust']);
                 $key = array_search($time['start'], $timehead);
                // echo $time['start']." -- ";var_dump($key); exit;
                 $bg = $this->tdColor($count);
@@ -1268,7 +1272,7 @@ public function mailReportTest()
         $bg3 = $this->tdColor($tot_count);
         $table_foot .= "<th".$bg3.">".$tot_count."</th>";
         endforeach;
-        $count_allData = $this->totalPickCount($array, $displayDate);
+        $count_allData = $this->totalPickCount($array, $displayDate, $this->request->getVar()['cust']);
         $bg4 = $this->tdColor($count_allData);
         $table_foot .="<th".$bg4.">".$count_allData."</th>";
         $table_foot .="</tr></tfoot></table><br><br><br>";
@@ -1364,12 +1368,16 @@ public function mailReportTest()
     return $counts;
 }
 
-public function totalPickCount($array, $date)
+public function totalPickCount($array, $date, $cust)
 {
     $count =0;
     foreach($array as $item):
         if(($item->start_date == $date) && ($item->complete_date == $date)){
-            $count ++;
+            if($cust ==1){
+                $count ++;
+            }else{
+            $count +=abs($item->transaction_qty);
+            }
         }
         endforeach;
         return $count;

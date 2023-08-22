@@ -80,7 +80,12 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
     $end->modify('-1 second');
     $end = $end->format('H:i:s');
     $builder = $this->db->table('pick_upload_temp');
-    $builder->select('COUNT(picker) AS total');
+    if($cust=='Speedo C/O Dawson Logistics'){
+      $builder->select('COUNT(picker) AS total');
+    }else{
+      $builder->select('SUM(ABS(transaction_qty)) AS total');
+    }
+    
     $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'complete_time>='=>$start, 'complete_time<='=>$end, 'doc_type'=>$docType, 'cust_name'=>$cust, 'new_type'=>$type));
     $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
         return $data;
@@ -91,7 +96,11 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
     //$date = date('m/d/y', strtotime($date));
     $type = strtolower($type);
     $builder = $this->db->table('pick_upload_temp');
-    $builder->select('COUNT(picker) AS total');
+    if($cust=='Speedo C/O Dawson Logistics'){
+      $builder->select('COUNT(picker) AS total');
+    }else{
+      $builder->select('SUM(ABS(transaction_qty)) AS total');
+    }
     $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'doc_type'=>$docType, 'cust_name'=>$cust, 'new_type'=>$type));
     $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
         return $data;
@@ -220,7 +229,7 @@ public function countPickSelector($picker, $date1, $date2, $start, $end, $type, 
   
   public function getAllData($date, $type, $docType, $cust){ 
       $builder = $this->db->table('pick_upload_temp');
-        $builder->select('picker, start_date, start_time, complete_date, complete_time');
+        $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty');
         $builder->where('start_date', $date);
         $builder->where('cust_name', $cust);
         if($type == 'Pick'){

@@ -1,3 +1,4 @@
 sendgrid.env
 dawsonpicks.dawsonlogistics.com
 .env
+writable/*
