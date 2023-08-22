@@ -893,7 +893,40 @@ function sendMailIN() {
            //var_dump($complete); exit;
             if(($data->picker == $picker) && ($start <= $complete) &&($complete <= $end)){
                 $count ++;
-               // echo $data->picker." == ".$start." - ".$end." ;;"
+            }
+            endforeach;
+            return $count;
+    }
+
+    public function pickerCountPerIntervalQty($allData, $picker, $start, $end, $data_time, $local_time, $date)
+    {
+        $start = $date." ".$start;
+        $end = $date." ".$end;
+        $end = new \DateTime($end, new \DateTimeZone($local_time));
+        //$end->setTimeZone(new \DateTimeZone($local_time));
+        $end->modify('-1 second');
+        $end = $end->format('H:i');
+        
+        $start = new \DateTime($start, new \DateTimeZone($local_time));
+       // $start->setTimeZone(new \DateTimeZone($local_time));
+        $start->modify('-1 second');
+        $start = $start->format('H:i');
+        
+        //$start = new \DateTime($start, new \DateTimeZone($data_time));
+        //$start->setTimeZone(new \DateTimeZone($local_time));
+        
+        //$end = new \DateTime($end, new \DateTimeZone($data_time));
+        //$end->setTimeZone(new \DateTimeZone($local_time));
+        $count =0;
+        foreach($allData as $data):
+           $complete = $data->start_time;
+            $complete = new \DateTime($complete, new \DateTimeZone($local_time));
+            $complete->modify('-1 hour');
+           $complete= $complete->format('H:i');
+           // $complete->setTimeZone(new \DateTimeZone($data_time)); 
+           //var_dump($complete); exit;
+            if(($data->picker == $picker) && ($start <= $complete) &&($complete <= $end)){
+                $count += $data->transaction_qty;
             }
             endforeach;
             return $count;
