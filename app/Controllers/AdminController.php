@@ -660,9 +660,7 @@ $email->addContent(
 "text/html", $message
 );
 
-$sendgrid = new \SendGrid('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');
-//$sendgrid = new \SendGrid('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');
-//$sendgrid = new \SendGrid('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');
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY1'));
 try {
 $response = $sendgrid->send($email);
 return ($response->statusCode());
