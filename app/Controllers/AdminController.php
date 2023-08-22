@@ -633,9 +633,9 @@ public function mailReport()
             $subject = "Dawson KPI Tool " . $displayDate . " " . $mailset['FromTIme'] . " - " . $mailset['ToTIme'];
          //   echo $message;
             $this->send_email($message, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "seun.sodimu@gmail.com", "Seun Sodimu", "developer@seun.me", "DAWSON KPI Tool", "", "", "", "", "");
-            $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message);
-            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message);
-           $this->sendMailSMTP("developer@seun.me", $subject, $message);
+            $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message, '');
+            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message, '');
+           $this->sendMailSMTP("developer@seun.me", $subject, $message, '');
         //    $this->sendMailSMTP("seun.sodimu@gmail.com", $subject, $message);
         }else{
             echo "No Pick";
@@ -721,13 +721,16 @@ function sendMailIN() {
         }
     }
     
-    function sendMailSMTP($to, $subject, $message) { 
+    function sendMailSMTP($to, $subject, $message, $cc) { 
         //$to = 'seun.sodimu@gmail.com';
         //$subject = 'Checking Mail';
         //$message = 'This is the first email';
         
         $email = \Config\Services::email();
         $email->setTo($to);
+        if(!empty($cc)){
+            $email->setCC($cc);
+        }   
         $email->setFrom('report@dawson-reports.com', 'Dawson Reports');
         
         $email->setSubject($subject);
@@ -736,6 +739,7 @@ function sendMailIN() {
 		{
 		    
             echo 'Email successfully sent to '.$to;
+            var_dump($cc);
         } 
 		else 
 		{
@@ -825,7 +829,7 @@ function sendMailIN() {
   // $this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
    //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
     //  $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
-       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
+       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []);
         }elseif($this->request->getVar()['view'] == 'pdf'){
             $html = $top;
             $html .=$table_head;
@@ -1162,7 +1166,7 @@ public function mailReportTest()
         $mailset = json_decode($mail_settings[0]->settings, true); 
        $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
       // $mailset['Interval'] =15;
-         $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
+        $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
         $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
@@ -1250,7 +1254,11 @@ public function mailReportTest()
  //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
  //   $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
  //   $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html); echo "<br>";
-    $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
+ if($cust == "Speedo C/O Dawson Logistics"){
+ $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []); echo "<br>";
+ }else{
+    $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html, "dennisb@dawsonlogistics.com, developer@seun.me"); echo "<br>";
+ }
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
         $html .=$table_head;
@@ -1516,6 +1524,8 @@ public function calculatePickerStats($data, $picker, $date)
     );
     return $data;
 }
+
+
 
 
 }
