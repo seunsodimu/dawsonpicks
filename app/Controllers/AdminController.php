@@ -1292,7 +1292,7 @@ public function mailReportTest()
  if($cust == "Speedo C/O Dawson Logistics"){
  $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []); echo "<br>";
  }else{
-    $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me"); echo "<br>";
+    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me"); echo "<br>";
  }
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
