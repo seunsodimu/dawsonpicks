@@ -24,7 +24,7 @@ class App extends BaseConfig
      * @var string
      */
    /** public $baseURL = 'http://localhost:8080/' */
-    public $baseURL = 'http://23.105.39.211/~dawsonpicksdawso/';
+    public $baseURL = 'http://localhost/dawson_picks/';
 
     /**
      * --------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $indexPage = '';
+    public $indexPage = 'index.php';
 
     /**
      * --------------------------------------------------------------------------

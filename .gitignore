@@ -1,4 +1,8 @@
 sendgrid.env
+<<<<<<< HEAD
 dawsonpicks.dawsonlogistics.com
 .env
 .htaccess
+=======
+.env
+>>>>>>> 235655f5eb777581d7f5d94f265678c17a3084c0

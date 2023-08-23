@@ -1,0 +1,124 @@
+
+CRITICAL - 2023-05-10 16:45:58 --> Undefined variable $signin
+#0 C:\xampp_\htdocs\dawson_picks\app\Views\login.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp_\\htdoc...', 28)
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\xampp_\\htdoc...')
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('login', Array, true)
+#4 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(53): view('login')
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#7 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-05-10 17:40:05 --> validateUser is not a valid rule.
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(300): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateUser')
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Pears123$', Array, Array)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-05-10 17:40:35 --> validateUser is not a valid rule.
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(300): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateUser')
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Pears123$', Array, Array)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-05-10 17:40:58 --> validateUser is not a valid rule.
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(300): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateUser')
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', '12345678', Array, Array)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-05-10 17:41:09 --> validateUser is not a valid rule.
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(300): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateUser')
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Pears123$', Array, Array)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-05-10 17:42:08 --> validateUser is not a valid rule.
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(300): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateUser')
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Pears123$', Array, Array)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#8 {main}
+ERROR - 2023-05-10 17:42:58 --> Error connecting to the database: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+CRITICAL - 2023-05-10 17:42:58 --> Unable to connect to the database.
+Main connection [MySQLi]: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#4 C:\xampp_\htdocs\dawson_picks\app\Validation\Userrules.php(12): CodeIgniter\BaseModel->first()
+#5 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(292): App\Validation\Userrules->validateUser('Pears123$', 'email,password', Array, NULL)
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Pears123$', Array, Array)
+#7 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp_\htdocs\dawson_picks\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#9 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\UserController->login()
+#10 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2023-05-10 18:35:00 --> Table 'dawsonpicks.gen_set' doesn't exist
+CRITICAL - 2023-05-10 18:35:00 --> Table 'dawsonpicks.gen_set' doesn't exist
+#0 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp_\htdocs\dawson_picks\app\Models\PickModel.php(203): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp_\htdocs\dawson_picks\app\Controllers\AdminController.php(1157): App\Models\PickModel->mailReportSettings()
+#6 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\AdminController->mailReport2()
+#7 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#8 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-05-10 18:37:12 --> Too few arguments to function App\Controllers\FTPImportController::notifyAdmin(), 3 passed in C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php on line 20 and exactly 4 expected
+#0 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(20): App\Controllers\FTPImportController->notifyAdmin('::1 Could not c...', 'seun.sodimu@gma...', '')
+#1 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2023-05-10 18:39:06 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+CRITICAL - 2023-05-10 18:42:37 --> ftp_get(): PORT subcommand request successful.
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get(): PORT...', 'C:\\xampp_\\htdoc...', 29)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(29): ftp_get(Resource id #130, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-05-10 18:44:16 --> ftp_get(): PORT subcommand request successful.
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get(): PORT...', 'C:\\xampp_\\htdoc...', 30)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(30): ftp_get(Resource id #129, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-05-10 22:14:22 --> ftp_get(): PORT subcommand request successful.
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ftp_get(): PORT...', 'C:\\xampp_\\htdoc...', 30)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\FTPImportController.php(30): ftp_get(Resource id #129, 'assets/archive/...', '/logimaxedi/Spe...', 1)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\FTPImportController->index()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FTPImportController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}

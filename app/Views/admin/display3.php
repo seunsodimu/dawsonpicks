@@ -12,7 +12,6 @@
 
 <div class="row" style="padding-left:50px; padding-right: 50px">
 <p><strong>Type: </strong><?= ucfirst($type) ?></p>
-<p><strong>DocType: </strong><?= ucfirst($docType) ?></p>
 <p><strong>Customer: </strong> <?= $customer ?></p>
 <p><strong>Report Date: </strong> <?= $date ?></p>
 <p><a href="<?= $layout ?>"><i class="fa fa-recycle"></i> Rotate</a></p>

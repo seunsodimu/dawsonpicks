@@ -1,0 +1,73 @@
+CRITICAL - 2023-08-22 13:33:21 --> Creation of dynamic property App\Controllers\UserController::$session is deprecated
+#0 C:\xampp\htdocs\dawsonkpi\app\Controllers\BaseController.php(51): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dyn...', 'C:\\xampp\\htdocs...', 51)
+#1 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(813): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+#2 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(413): CodeIgniter\CodeIgniter->createController()
+#3 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(329): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\dawsonkpi\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-08-22 13:38:36 --> Creation of dynamic property App\Controllers\UserController::$session is deprecated
+#0 C:\xampp\htdocs\dawsonkpi\app\Controllers\BaseController.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dyn...', 'C:\\xampp\\htdocs...', 52)
+#1 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(813): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+#2 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(413): CodeIgniter\CodeIgniter->createController()
+#3 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(329): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\dawsonkpi\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2023-08-22 13:40:28 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2023-08-22 13:40:28 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#4 C:\xampp\htdocs\dawsonkpi\app\Validation\Userrules.php(12): CodeIgniter\BaseModel->first()
+#5 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Validation\Validation.php(292): App\Validation\Userrules->validateUser('Z*yHFF!553A7UwY', 'email,password', Array, NULL)
+#6 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Z*yHFF!553A7UwY', Array, Array)
+#7 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\dawsonkpi\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#9 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(835): App\Controllers\UserController->login()
+#10 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(422): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(329): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\dawsonkpi\index.php(38): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2023-08-22 13:46:46 --> Error connecting to the database: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+CRITICAL - 2023-08-22 13:46:46 --> Unable to connect to the database.
+Main connection [MySQLi]: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+#0 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#4 C:\xampp\htdocs\dawsonkpi\app\Validation\Userrules.php(12): CodeIgniter\BaseModel->first()
+#5 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Validation\Validation.php(292): App\Validation\Userrules->validateUser('Z*yHFF!553A7UwY', 'email,password', Array, NULL)
+#6 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Z*yHFF!553A7UwY', Array, Array)
+#7 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\dawsonkpi\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#9 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(835): App\Controllers\UserController->login()
+#10 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(422): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(329): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\dawsonkpi\index.php(38): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2023-08-22 13:51:03 --> Error connecting to the database: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+CRITICAL - 2023-08-22 13:51:03 --> Unable to connect to the database.
+Main connection [MySQLi]: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+#0 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#4 C:\xampp\htdocs\dawsonkpi\app\Validation\Userrules.php(12): CodeIgniter\BaseModel->first()
+#5 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Validation\Validation.php(292): App\Validation\Userrules->validateUser('Z*yHFF!553A7UwY', 'email,password', Array, NULL)
+#6 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('password', 'password', 'Z*yHFF!553A7UwY', Array, Array)
+#7 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\dawsonkpi\app\Controllers\UserController.php(27): CodeIgniter\Controller->validate(Array, Array)
+#9 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(835): App\Controllers\UserController->login()
+#10 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(422): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(329): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\dawsonkpi\index.php(38): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2023-08-22 14:27:26 --> Undefined property: stdClass::$transaction_qty
+#0 C:\xampp\htdocs\dawsonkpi\app\Controllers\AdminController.php(895): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp\\htdocs...', 895)
+#1 C:\xampp\htdocs\dawsonkpi\app\Controllers\AdminController.php(1244): App\Controllers\AdminController->pickerCountPerInterval(Array, 'CARLOSG   ', '06:59', '07:59', 'America/New_Yor...', 'America/Chicago', '2023-08-22')
+#2 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(835): App\Controllers\AdminController->mailReport2()
+#3 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(422): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#4 C:\xampp\htdocs\dawsonkpi\vendor\codeigniter4\framework\system\CodeIgniter.php(329): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\dawsonkpi\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}

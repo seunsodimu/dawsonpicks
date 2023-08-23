@@ -1,0 +1,8 @@
+CRITICAL - 2023-05-12 21:33:53 --> Undefined variable $picker_rows
+#0 C:\xampp_\htdocs\dawson_picks\app\Controllers\AdminController.php(1406): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp_\\htdoc...', 1406)
+#1 C:\xampp_\htdocs\dawson_picks\app\Controllers\AdminController.php(1174): App\Controllers\AdminController->create_picks_table(Array, 15)
+#2 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(832): App\Controllers\AdminController->mailReport2()
+#3 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#4 C:\xampp_\htdocs\dawson_picks\vendor\codeigniter4\framework\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp_\htdocs\dawson_picks\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 {main}

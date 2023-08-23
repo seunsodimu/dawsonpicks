@@ -59,18 +59,7 @@ helper('date');
             <div class="panel panel-primary">
                 <div class="panel-heading">View Display</div>
                 <div class="panel-body">
-                    <form method="GET" id="displayform" action="<?= base_url('mail-report2') ?>" target="_blank">
-                    <input type="hidden" name="reqType" value="form">
-                    <input type="hidden" name="view" value="html">
-                    <div class="form-group">
-    <label>Select Customer</label>
-    <select name="cust" class="form-control" id="cust">
-    <?php foreach($customers as $customer){
-            echo "<option value=".$customer['cust_id'].">".$customer['cust_name']."</option>";
-        }
-        ?>
-        </select>
-</div>
+                    <form method="GET" id="displayform" action="<?= base_url('display') ?>">
                     <div class="row">
                         <div class="col-md-6">
                             <label>Local Time</label>
@@ -115,7 +104,7 @@ helper('date');
 </div>
 <div class="form-group">
     <label>Type</label>
-    <select name="type" class="form-control"><option <?= (session()->get('Type')=="Pallet")?"selected": "" ?>>Pallet</option><option <?= ((session()->get('Type')=="Cases") || (empty(session()->get('Type'))))?"selected": "" ?>>Cases</option></select>
+    <select name="Type" class="form-control"><option <?= (session()->get('Type')=="Pallet")?"selected": "" ?>>Pallet</option><option <?= ((session()->get('Type')=="Cases") || (empty(session()->get('Type'))))?"selected": "" ?>>Cases</option></select>
 </div>
 <div class="form-group">
     <input type="submit" id="submit-btn-view" value="Submit" class="btn btn-lg btn-success" />

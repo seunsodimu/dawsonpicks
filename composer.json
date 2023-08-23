@@ -8,7 +8,11 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "codeigniter4/framework": "^4",
+<<<<<<< HEAD
     "sendgrid/sendgrid": "~7"
+=======
+		"ext-gd": "*"
+>>>>>>> 235655f5eb777581d7f5d94f265678c17a3084c0
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

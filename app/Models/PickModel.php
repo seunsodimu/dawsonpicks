@@ -223,9 +223,7 @@ public function countPickSelector($picker, $date1, $date2, $start, $end, $type, 
         $builder->select('picker, start_date, start_time, complete_date, complete_time');
         $builder->where('start_date', $date);
         $builder->where('cust_name', $cust);
-        if($type == 'Pick'){
-            $builder->where('new_type', $type);
-        }
+        $builder->where('new_type', $type);
         $builder->where('doc_type', $docType);
         $builder->orderBy('picker ASC, complete_time DESC');
        // $builder->limit(100);
