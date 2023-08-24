@@ -6,7 +6,6 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use App\Models\PickModel;
 use App\Models\UserModel;
-use App\Models\CustomerModel;
 use CodeIgniter\I18n\Time;
 
 
@@ -19,9 +18,7 @@ class AdminController extends BaseController
     public function index()
     { 
         $pick = new PickModel();
-        $cust = new CustomerModel();
         $data['pickers'] = $pick->distinctPickers();
-        $data['customers'] = $cust->getCustomer();
         $data['title'] = "";
         return view("admin/dashboard", $data);
     }
@@ -633,9 +630,9 @@ public function mailReport()
             $subject = "Dawson KPI Tool " . $displayDate . " " . $mailset['FromTIme'] . " - " . $mailset['ToTIme'];
          //   echo $message;
             $this->send_email($message, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "seun.sodimu@gmail.com", "Seun Sodimu", "developer@seun.me", "DAWSON KPI Tool", "", "", "", "", "");
-            $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message, '');
-            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message, '');
-           $this->sendMailSMTP("developer@seun.me", $subject, $message, '');
+            $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message, "");
+            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message, "");
+           $this->sendMailSMTP("developer@seun.me", $subject, $message, "");
         //    $this->sendMailSMTP("seun.sodimu@gmail.com", $subject, $message);
         }else{
             echo "No Pick";
@@ -660,7 +657,9 @@ $email->addContent(
 "text/html", $message
 );
 
-$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY1'));
+$sendgrid = new \SendGrid('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');
+//$sendgrid = new \SendGrid('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');
+//$sendgrid = new \SendGrid('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');
 try {
 $response = $sendgrid->send($email);
 return ($response->statusCode());
@@ -726,18 +725,16 @@ function sendMailIN() {
         
         $email = \Config\Services::email();
         $email->setTo($to);
-        if(!empty($cc)){
-            $email->setCC($cc);
-        }   
         $email->setFrom('report@dawson-reports.com', 'Dawson Reports');
-        
+        if($cc!=""){
+        $email->setCC($cc);
+        }
         $email->setSubject($subject);
         $email->setMessage($message);
         if ($email->send()) 
 		{
 		    
             echo 'Email successfully sent to '.$to;
-            var_dump($cc);
         } 
 		else 
 		{
@@ -827,7 +824,7 @@ function sendMailIN() {
   // $this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
    //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
     //  $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
-       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []);
+       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, "");
         }elseif($this->request->getVar()['view'] == 'pdf'){
             $html = $top;
             $html .=$table_head;
@@ -963,14 +960,25 @@ function sendMailIN() {
     
     public function getCustomerName($id)
     {
-        $customers = new CustomerModel();
-        $cust = $customers->getCustomer($id); //var_dump($cust); exit;
-        return $cust['cust_name'];
+        $cust = "";
+        switch($id){
+            case 1:
+                $cust = "Speedo C/O Dawson Logistics";
+                break;
+            case 2:
+                $cust ="Sprout Foods, Inc";
+                break;
+                default:
+                    $cust = "Speedo C/O Dawson Logistics";
+                    break;
+        }
+        return $cust;
     }
     
     
-    
+
     public function summaryTable($pickers, $array, $interval, $timeArray, $cust)
+
     {
         $total_avg = 0;
         $totpik = 0;
@@ -1124,7 +1132,6 @@ public function dispPicksTest($displayDate, $FromTIme, $ToTIme, $Interval, $docT
         return $data;
 }
 
-
 public function mailReportTest()
 { 
     $pick = new PickModel();
@@ -1188,9 +1195,9 @@ public function mailReportTest()
            // echo $message; exit;
           //  $this->send_email($message, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "seun.sodimu@gmail.com", "Seun Sodimu", "developer@seun.me", "DAWSON KPI Tool", "", "", "", "", "");
          //   $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message);
-            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message);
-           $this->sendMailSMTP("developer@seun.me", $subject, $message);
-           $this->sendMailSMTP("willr@dawsonlogistics.com", $subject, $message);
+            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message, "");
+           $this->sendMailSMTP("developer@seun.me", $subject, $message, "");
+           $this->sendMailSMTP("willr@dawsonlogistics.com", $subject, $message, "");
         //    $this->sendMailSMTP("seun.sodimu@gmail.com", $subject, $message);
         }else{
             echo "No Pick";
@@ -1206,22 +1213,12 @@ public function mailReportTest()
         $mailset = json_decode($mail_settings[0]->settings, true); 
        $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
       // $mailset['Interval'] =15;
-        $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
+         $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
-        $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
-        $docType = !isset($this->request->getVar()['docType']) ? $mailset['docType'] : $this->request->getVar()['docType'];
-        $array = $pick->getAllData($displayDate, $type, $docType, $cust);
+     $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
+        $array = $pick->getAllData($displayDate, $type, $mailset['docType'], $cust);
        $times = $this->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
-       if(isset($this->request->getVar()['reqType'])){
-        $array = $pick->getAllData($displayDate, $type, $docType, $cust);
-        $fromTime = $this->request->getVar()['FromTIme'];
-        $toTime = $this->request->getVar()['ToTIme'];
-        $inTerval = $this->request->getVar()['Interval'];
-        $times = $this->getBetweenTimes($fromTime, $toTime, $inTerval);
-        $mailset['dataTime'] = $this->request->getVar()['dataTime'];
-        $mailset['localTime'] = $this->request->getVar()['localTime'];
-    }
         $pickers = [];
       
             foreach ($array as $item) {
@@ -1233,7 +1230,7 @@ public function mailReportTest()
    
     
      $top = "<html><head><meta charset='UTF-8'><title>KPI Tool</title></head><body>";
-     $top .="<p><strong>Type:</strong> ".ucfirst($type)."</p><p><strong>DocType:</strong> ".ucfirst($docType)."</p><p><strong>Customer:</strong> ".$cust."</p><p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
+     $top .="<p><strong>Type:</strong> ".ucfirst($type)."</p><p><strong>Customer:</strong> ".$cust."</p><p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
      $table_head = "<table id='rowtbl3' width=100% border='1' cellspacing=0 cellpadding=10><thead><tr><th></th>";//var_dump($mailset); exit;
      $timeheads = [];
      foreach($times as $time):
@@ -1288,14 +1285,14 @@ public function mailReportTest()
     // echo $displayDate."<br>";
      if($this->request->getVar()['view'] == 'email'){
      $subject = $cust." KPI report for ".$displayDate;
-     $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."&docType=".$docType;
+     $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
 //$this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
  //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
  //   $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
  //   $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html); echo "<br>";
  if($cust == "Speedo C/O Dawson Logistics"){
- $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []); echo "<br>";
+ $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, ""); echo "<br>";
  }else{
     $subject = $cust." KPI report";
     $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me"); echo "<br>";
@@ -1318,16 +1315,15 @@ public function mailReportTest()
         $data['title'] = "KPI Report";
         $data['customer'] = $cust;
         $data['type'] = $type;
-        $data['docType'] = $docType;
         $data['date'] = $displayDate;
-        $data['layout'] = base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."&docType=".$docType;
+        $data['layout'] = base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
         return view("admin/display3", $data);
     }
     else{
         $html = $top;
-        $html .="<a href='".base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."&docType=".$docType."'>Rotate Table</a>";
+        $html .="<a href='".base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."'>Rotate Table</a>";
         $html .=$table_head;
         $html .=$table_body;
         $html .=$table_foot;
@@ -1569,8 +1565,6 @@ public function calculatePickerStats($data, $picker, $date)
     );
     return $data;
 }
-
-
 
 
 }
