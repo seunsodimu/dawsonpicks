@@ -48,19 +48,19 @@ class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
-        $this->session = \Config\Services::session();
+    //    $this->session = \Config\Services::session();
     }
 	
 	public function checkLogin()
 	{ 
-	if(!$this->session->get('logged_in'))
+//	if(!$this->session->get('logged_in'))
 	{
 	//var_dump('111000'); exit;
-		$this->session->setFlashdata('responseStatus', 'You do not have access to this resource, please login!');
+		//$this->session->setFlashdata('responseStatus', 'You do not have access to this resource, please login!');
 	
 		
 		$data['page_title'] = "Login";
-		$data['weather'] = $this->userLocation();
+	//	$data['weather'] = $this->userLocation();
 		$data['signin'] = "../login/signin.php";
 		echo view('login', $data); exit;
 	}	
