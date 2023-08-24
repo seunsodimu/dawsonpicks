@@ -863,13 +863,17 @@ function sendMailIN() {
     {
         $start = $date." ".$start;
         $end = $date." ".$end;
-        $end = new \DateTime($end, new \DateTimeZone($local_time));
-        //$end->setTimeZone(new \DateTimeZone($local_time));
+        $end = new \DateTime($end, new \DateTimeZone($data_time));
+       if($cust == 2){
+        $end->setTimeZone(new \DateTimeZone($local_time));
+       }
         $end->modify('-1 second');
         $end = $end->format('H:i');
         
-        $start = new \DateTime($start, new \DateTimeZone($local_time));
-       // $start->setTimeZone(new \DateTimeZone($local_time));
+        $start = new \DateTime($start, new \DateTimeZone($data_time));
+        if($cust ==2){
+       $start->setTimeZone(new \DateTimeZone($local_time));
+        }
         $start->modify('-1 second');
         $start = $start->format('H:i');
         
@@ -878,10 +882,11 @@ function sendMailIN() {
         
         //$end = new \DateTime($end, new \DateTimeZone($data_time));
         //$end->setTimeZone(new \DateTimeZone($local_time));
+     //   var_dump($start." - ".$end); exit;
         $count =0;
         foreach($allData as $data):
            $complete = $data->start_time;
-            $complete = new \DateTime($complete, new \DateTimeZone($local_time));
+            $complete = new \DateTime($complete, new \DateTimeZone($data_time));
             $complete->modify('-1 hour');
            $complete= $complete->format('H:i');
            // $complete->setTimeZone(new \DateTimeZone($data_time)); 
@@ -1282,8 +1287,19 @@ public function mailReportTest()
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
 //$this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
  //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
+<<<<<<< HEAD
 //    $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
     $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
+=======
+ //   $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
+ //   $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html); echo "<br>";
+ if($cust == "Speedo C/O Dawson Logistics"){
+ $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []); echo "<br>";
+ }else{
+    $subject = $cust." KPI report";
+    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me"); echo "<br>";
+ }
+>>>>>>> FirstBranch
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
         $html .=$table_head;
