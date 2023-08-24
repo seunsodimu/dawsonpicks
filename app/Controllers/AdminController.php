@@ -630,9 +630,11 @@ public function mailReport()
             $subject = "Dawson KPI Tool " . $displayDate . " " . $mailset['FromTIme'] . " - " . $mailset['ToTIme'];
          //   echo $message;
             $this->send_email($message, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "seun.sodimu@gmail.com", "Seun Sodimu", "developer@seun.me", "DAWSON KPI Tool", "", "", "", "", "");
-            $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message);
-            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message);
-           $this->sendMailSMTP("developer@seun.me", $subject, $message);
+
+            $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message, "");
+            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message, "");
+           $this->sendMailSMTP("developer@seun.me", $subject, $message, "");
+
         //    $this->sendMailSMTP("seun.sodimu@gmail.com", $subject, $message);
         }else{
             echo "No Pick";
@@ -718,7 +720,7 @@ function sendMailIN() {
         }
     }
     
-    function sendMailSMTP($to, $subject, $message) { 
+    function sendMailSMTP($to, $subject, $message, $cc) { 
         //$to = 'seun.sodimu@gmail.com';
         //$subject = 'Checking Mail';
         //$message = 'This is the first email';
@@ -726,7 +728,9 @@ function sendMailIN() {
         $email = \Config\Services::email();
         $email->setTo($to);
         $email->setFrom('report@dawson-reports.com', 'Dawson Reports');
-        
+        if($cc!=""){
+        $email->setCC($cc);
+        }
         $email->setSubject($subject);
         $email->setMessage($message);
         if ($email->send()) 
@@ -822,7 +826,8 @@ function sendMailIN() {
   // $this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
    //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
     //  $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
-       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
+
+       $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, "");
         }elseif($this->request->getVar()['view'] == 'pdf'){
             $html = $top;
             $html .=$table_head;
@@ -1193,9 +1198,9 @@ public function mailReportTest()
            // echo $message; exit;
           //  $this->send_email($message, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "seun.sodimu@gmail.com", "Seun Sodimu", "developer@seun.me", "DAWSON KPI Tool", "", "", "", "", "");
          //   $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $message);
-            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message);
-           $this->sendMailSMTP("developer@seun.me", $subject, $message);
-           $this->sendMailSMTP("willr@dawsonlogistics.com", $subject, $message);
+            $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $message, "");
+           $this->sendMailSMTP("developer@seun.me", $subject, $message, "");
+           $this->sendMailSMTP("willr@dawsonlogistics.com", $subject, $message, "");
         //    $this->sendMailSMTP("seun.sodimu@gmail.com", $subject, $message);
         }else{
             echo "No Pick";
@@ -1287,19 +1292,15 @@ public function mailReportTest()
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
 //$this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
  //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
-<<<<<<< HEAD
-//    $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
-    $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html);
-=======
+
  //   $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
  //   $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html); echo "<br>";
  if($cust == "Speedo C/O Dawson Logistics"){
- $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, []); echo "<br>";
+ $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, ""); echo "<br>";
  }else{
     $subject = $cust." KPI report";
     $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me"); echo "<br>";
  }
->>>>>>> FirstBranch
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
         $html .=$table_head;
