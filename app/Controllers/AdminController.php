@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use App\Models\PickModel;
 use App\Models\UserModel;
 use CodeIgniter\I18n\Time;
+use Exception;
 
 
 class AdminController extends BaseController
@@ -659,9 +660,7 @@ $email->addContent(
 "text/html", $message
 );
 
-$sendgrid = new \SendGrid('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');
-//$sendgrid = new \SendGrid('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');
-//$sendgrid = new \SendGrid('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');
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY1'));
 try {
 $response = $sendgrid->send($email);
 return ($response->statusCode());
@@ -1299,7 +1298,7 @@ public function mailReportTest()
  $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, ""); echo "<br>";
  }else{
     $subject = $cust." KPI report";
-    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me"); echo "<br>";
+    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com"); echo "<br>";
  }
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
