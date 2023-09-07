@@ -1218,6 +1218,7 @@ public function mailReportTest()
          $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
+        $mailset['docType'] = !isset($this->request->getVar()['docType']) ? $mailset['docType'] : $this->request->getVar()['docType'];
      $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
         $array = $pick->getAllData($displayDate, $type, $mailset['docType'], $cust);
        $times = $this->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
@@ -1298,7 +1299,7 @@ public function mailReportTest()
  $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, ""); echo "<br>";
  }else{
     $subject = $cust." KPI report";
-    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com"); echo "<br>";
+    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me"); echo "<br>";
  }
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
@@ -1319,6 +1320,7 @@ public function mailReportTest()
         $data['customer'] = $cust;
         $data['type'] = $type;
         $data['date'] = $displayDate;
+        $data['docType'] = $mailset['docType'];
         $data['layout'] = base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
