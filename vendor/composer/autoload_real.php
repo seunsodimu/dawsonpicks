@@ -23,17 +23,6 @@ class ComposerAutoloaderInit84155a85edbbbf9e1aa41cb6e7b234fe
         }
 
         spl_autoload_register(array('ComposerAutoloaderInit84155a85edbbbf9e1aa41cb6e7b234fe', 'loadClassLoader'), true, true);
-<<<<<<< HEAD
-        self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(__DIR__));
-        spl_autoload_unregister(array('ComposerAutoloaderInit84155a85edbbbf9e1aa41cb6e7b234fe', 'loadClassLoader'));
-
-        require __DIR__ . '/autoload_static.php';
-        call_user_func(\Composer\Autoload\ComposerStaticInit84155a85edbbbf9e1aa41cb6e7b234fe::getInitializer($loader));
-
-        $loader->register(true);
-
-        $includeFiles = \Composer\Autoload\ComposerStaticInit84155a85edbbbf9e1aa41cb6e7b234fe::$files;
-=======
         self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(\dirname(__FILE__)));
         spl_autoload_unregister(array('ComposerAutoloaderInit84155a85edbbbf9e1aa41cb6e7b234fe', 'loadClassLoader'));
 
@@ -66,7 +55,6 @@ class ComposerAutoloaderInit84155a85edbbbf9e1aa41cb6e7b234fe
         } else {
             $includeFiles = require __DIR__ . '/autoload_files.php';
         }
->>>>>>> 235655f5eb777581d7f5d94f265678c17a3084c0
         foreach ($includeFiles as $fileIdentifier => $file) {
             composerRequire84155a85edbbbf9e1aa41cb6e7b234fe($fileIdentifier, $file);
         }
