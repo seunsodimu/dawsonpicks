@@ -75,12 +75,27 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                      $importData_arr[$i]['ship_to_rec_from'] = $filedata[15];
                      $importData_arr[$i]['transaction_qty'] = $filedata[16];
                     $importData_arr[$i]['upload_by'] = 'scheduled';
-                     if((str_contains($filedata[15], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
-                         $importData_arr[$i]['new_type'] = 'pallet';
-                     }else{
-                         $importData_arr[$i]['new_type'] = 'cases';
-                     }
 
+                    ////pallet and cases
+
+                     if(str_contains($filedata[14], 'Speedo')){
+                        if((str_contains($filedata[15], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
+                            $importData_arr[$i]['new_type'] = 'pallet';
+                        }else{
+                            $importData_arr[$i]['new_type'] = 'cases';
+                        }
+                       }elseif(str_contains($filedata[14], 'Sprout')){
+                           if(trim($filedata[15])[-1] == 'P'){
+                               $importData_arr[$i]['new_type'] = 'pallet';
+                       }else{
+                           $importData_arr[$i]['new_type'] = 'cases';
+                       }
+                       }
+                       else{
+                           $importData_arr[$i]['new_type'] = 'cases';
+                       } 
+
+                     /////// pallet and cases end
                   }
 
                   $i++;

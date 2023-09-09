@@ -896,7 +896,7 @@ function sendMailIN() {
            // $complete->setTimeZone(new \DateTimeZone($data_time)); 
            //var_dump($complete); exit;
             if(($data->picker == $picker) && ($start <= $complete) &&($complete <= $end)){
-                if($cust == 2){
+                if(($cust == 2) && ($data->new_type == 'cases')){
                 $count += abs($data->transaction_qty);
                 }else{
                     $count ++;

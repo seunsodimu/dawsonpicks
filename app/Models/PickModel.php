@@ -83,7 +83,11 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
     if($cust=='Speedo C/O Dawson Logistics'){
       $builder->select('COUNT(picker) AS total');
     }else{
+     if($type=='pallet'){
+      $builder->select('COUNT(picker) AS total');
+     }else{
       $builder->select('SUM(ABS(transaction_qty)) AS total');
+     }
     }
     
     $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'complete_time>='=>$start, 'complete_time<='=>$end, 'doc_type'=>$docType, 'cust_name'=>$cust, 'new_type'=>$type));
@@ -99,7 +103,11 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
     if($cust=='Speedo C/O Dawson Logistics'){
       $builder->select('COUNT(picker) AS total');
     }else{
-      $builder->select('SUM(ABS(transaction_qty)) AS total');
+      if($type=='pallet'){
+        $builder->select('COUNT(picker) AS total');
+       }else{
+        $builder->select('SUM(ABS(transaction_qty)) AS total');
+       }
     }
     $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'doc_type'=>$docType, 'cust_name'=>$cust, 'new_type'=>$type));
     $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
@@ -229,7 +237,7 @@ public function countPickSelector($picker, $date1, $date2, $start, $end, $type, 
   
   public function getAllData($date, $type, $docType, $cust){ 
       $builder = $this->db->table('pick_upload_temp');
-        $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty');
+        $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty, new_type');
         $builder->where('start_date', $date);
         $builder->where('cust_name', $cust);
         $builder->where('new_type', $type);
