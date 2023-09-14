@@ -1299,7 +1299,9 @@ public function mailReportTest()
  $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, ""); echo "<br>";
  }else{
     $subject = $cust." KPI report";
-    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me"); echo "<br>";
+    $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
+   // $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me";
+    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, $emails_recs); echo "<br>". $emails_recs;
  }
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
