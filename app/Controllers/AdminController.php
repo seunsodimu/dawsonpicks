@@ -1219,8 +1219,11 @@ public function mailReportTest()
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
         $mailset['docType'] = !isset($this->request->getVar()['docType']) ? $mailset['docType'] : $this->request->getVar()['docType'];
-     $cust = $this->getCustomerName(($this->request->getVar()['cust'])); //var_dump($cust); exit;
+        $docType = $mailset['docType'];
+        $customer = ($this->request->getVar()['cust']);
+     $cust = $this->getCustomerName($customer); 
         $array = $pick->getAllData($displayDate, $type, $mailset['docType'], $cust);
+        
        $times = $this->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
         $pickers = [];
       
@@ -1233,7 +1236,10 @@ public function mailReportTest()
    
     
      $top = "<html><head><meta charset='UTF-8'><title>KPI Tool</title></head><body>";
-     $top .="<p><strong>Type:</strong> ".ucfirst($type)."</p><p><strong>Customer:</strong> ".$cust."</p><p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
+     $top .="<p><strong>Type:</strong> ".ucfirst($type)."</p>";
+     $top .="<p><strong>Pick/Putaway:</strong> ".ucfirst($docType)."</p>";
+     $top .="<p><strong>Customer:</strong> ".$cust."</p>";
+     $top .="<p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
      $table_head = "<table id='rowtbl3' width=100% border='1' cellspacing=0 cellpadding=10><thead><tr><th></th>";//var_dump($mailset); exit;
      $timeheads = [];
      foreach($times as $time):
@@ -1287,22 +1293,32 @@ public function mailReportTest()
         $bottom =     "</body></html>";
     // echo $displayDate."<br>";
      if($this->request->getVar()['view'] == 'email'){
+        $override = !isset($this->request->getVar()['override']) ? false : true;
      $subject = $cust." KPI report for ".$displayDate;
-     $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
+     $link = "Click the link below to view table in a browser <br>".base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."&docType=".$docType."<br><br>";
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
-//$this->send_email($html, $subject, "dlspeedooutbound@dawsonlogistics.com", "dlspeedooutbound", "dennisb@dawsonlogistics.com", "Dennis Brinkhus", "report@dawson-reports.com", "DAWSON KPI Tool", "", "", "", "", "");
- //   $this->sendMailSMTP("dennisb@dawsonlogistics.com", $subject, $html); echo "<br>";
 
- //   $this->sendMailSMTP("developer@seun.me", $subject, $html); echo "<br>";
- //   $this->sendMailSMTP("brooks.bennett-miller@dawson-team.com", $subject, $html); echo "<br>";
  if($cust == "Speedo C/O Dawson Logistics"){
- $this->sendMailSMTP("dlspeedooutbound@dawsonlogistics.com", $subject, $html, ""); echo "<br>";
+ $email_rec = "dlspeedooutbound@dawsonlogistics.com";
+ $emails_recs = "";
  }else{
     $subject = $cust." KPI report";
+    $email_rec = "brooksb@dawsonlogistics.com";
     $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
-   // $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, developer@seun.me";
-    $this->sendMailSMTP("brooksb@dawsonlogistics.com", $subject, $html, $emails_recs); echo "<br>". $emails_recs;
  }
+    $currentReport = json_encode($array, JSON_PRETTY_PRINT);
+    $local_json = "assets/json/last_".$customer.$type.$docType.".json";
+    $previousReport = file_exists($local_json) ? file_get_contents($local_json) : '';
+if ($currentReport !== $previousReport && !empty($currentReport)) {
+    $this->sendMailSMTP($email_rec, $subject, $html, $emails_recs); echo "<br>". $emails_recs;
+    file_put_contents($local_json, $previousReport);
+}else{
+    if($override){
+        $this->sendMailSMTP($email_rec, $subject, $html, $emails_recs); echo "<br>". $emails_recs;
+    }
+    echo "No new data";
+}
+ 
      }elseif($this->request->getVar()['view'] == 'pdf'){
         $html = $top;
         $html .=$table_head;
@@ -1317,13 +1333,18 @@ public function mailReportTest()
     $dompdf->render();
     $dompdf->stream();
     }elseif($this->request->getVar()['view'] == 'html'){
-    
+
+        // $currentReport = json_encode($array, JSON_PRETTY_PRINT);
+        // $local_json = "assets/json/last_".$customer.$type.$docType.".json";
+        // $previousReport = file_exists($local_json) ? file_get_contents($local_json) : '';
+        // file_put_contents($local_json, $currentReport);
+
         $data['title'] = "KPI Report";
         $data['customer'] = $cust;
         $data['type'] = $type;
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
-        $data['layout'] = base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
+        $data['layout'] = base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."&docType=".$docType;
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
         return view("admin/display3", $data);
