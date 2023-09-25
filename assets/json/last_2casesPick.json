@@ -1,0 +1,191 @@
+[
+    {
+        "picker": "CARLOSG   ",
+        "start_date": "2023-09-19",
+        "start_time": "09:36:44",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:37:45",
+        "transaction_qty": "-25      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "CARLOSG   ",
+        "start_date": "2023-09-19",
+        "start_time": "09:34:43",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:36:44",
+        "transaction_qty": "-2       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "ESTEPHANIE",
+        "start_date": "2023-09-19",
+        "start_time": "09:55:36",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:57:23",
+        "transaction_qty": "-5       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "ESTEPHANIE",
+        "start_date": "2023-09-19",
+        "start_time": "09:48:16",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:48:51",
+        "transaction_qty": "-13      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "ESTEPHANIE",
+        "start_date": "2023-09-19",
+        "start_time": "09:36:59",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:40:51",
+        "transaction_qty": "-26      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "ESTEPHANIE",
+        "start_date": "2023-09-19",
+        "start_time": "09:36:50",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:36:59",
+        "transaction_qty": "-7       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "ESTEPHANIE",
+        "start_date": "2023-09-19",
+        "start_time": "09:25:20",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:32:54",
+        "transaction_qty": "-3       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "JUNIOR    ",
+        "start_date": "2023-09-19",
+        "start_time": "09:48:56",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:51:51",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "JUNIOR    ",
+        "start_date": "2023-09-19",
+        "start_time": "09:46:06",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:48:55",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "JUNIOR    ",
+        "start_date": "2023-09-19",
+        "start_time": "09:36:44",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:40:54",
+        "transaction_qty": "-2       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "LAURA     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:56:25",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:58:22",
+        "transaction_qty": "-17      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "LAURA     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:49:12",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:56:25",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "LAURA     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:48:19",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:49:12",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "LAURA     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:36:57",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:48:19",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "LAURA     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:31:35",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:36:56",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "LAURA     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:30:00",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:31:01",
+        "transaction_qty": "-36      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "MICHAEL   ",
+        "start_date": "2023-09-19",
+        "start_time": "09:42:15",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:49:49",
+        "transaction_qty": "-36      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "OSCAR     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:42:49",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:52:48",
+        "transaction_qty": "-18      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "OSCAR     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:38:15",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:42:49",
+        "transaction_qty": "-1       ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "OSCAR     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:29:13",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:38:14",
+        "transaction_qty": "-10      ",
+        "new_type": "cases"
+    },
+    {
+        "picker": "OSCAR     ",
+        "start_date": "2023-09-19",
+        "start_time": "09:24:52",
+        "complete_date": "2023-09-19",
+        "complete_time": "09:29:12",
+        "transaction_qty": "-21      ",
+        "new_type": "cases"
+    }
+]

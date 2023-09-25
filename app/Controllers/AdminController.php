@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use App\Models\PickModel;
+use App\Models\CustomerModel;
 use App\Models\UserModel;
 use CodeIgniter\I18n\Time;
 use Exception;
@@ -19,7 +20,9 @@ class AdminController extends BaseController
     public function index()
     { 
         $pick = new PickModel();
+        $customers = new CustomerModel();
         $data['pickers'] = $pick->distinctPickers();
+        $data['customers'] = $customers->getCustomer();
         $data['title'] = "";
         return view("admin/dashboard", $data);
     }
@@ -579,7 +582,7 @@ public function mailReport()
         $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
-       $cust = $this->getCustomerName(($this->request->getVar()['cust']));
+       $cust = isset($this->request->getVar()['cust']) ? $this->request->getVar()['cust'] : 1;
      //  echo $cust; exit;
         $newdata = $this->dispPicks($displayDate, $mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval'], $mailset['docType'], $type, $mailset['dataTime'], $mailset['localTime'], $cust); //var_dump($newdata); exit;
         if ($newdata['alltotalpick'] > 0) {
@@ -1213,15 +1216,15 @@ public function mailReportTest()
         
         $mail_settings = $pick->mailReportSettings();
         $mailset = json_decode($mail_settings[0]->settings, true); 
-       $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
-      // $mailset['Interval'] =15;
-         $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
+        $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
+        $mailset['Interval'] = !isset($this->request->getVar()['Interval']) ? $mailset['Interval'] : $this->request->getVar()['Interval'];
+        $displayDate = !isset($this->request->getVar()['displayDate']) ? $displayDate : $this->request->getVar()['displayDate'];
         $type = !isset($this->request->getVar()['type']) ? 'Pallet' : $this->request->getVar()['type'];
         $type =strtolower($type);
         $mailset['docType'] = !isset($this->request->getVar()['docType']) ? $mailset['docType'] : $this->request->getVar()['docType'];
         $docType = $mailset['docType'];
-        $customer = ($this->request->getVar()['cust']);
-     $cust = $this->getCustomerName($customer); 
+        $customer = isset($this->request->getVar()['cust']) ? $this->request->getVar()['cust'] : 1;
+        $cust = $this->getCustomerName($customer); 
         $array = $pick->getAllData($displayDate, $type, $mailset['docType'], $cust);
         
        $times = $this->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
@@ -1299,17 +1302,21 @@ public function mailReportTest()
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
 
  if($cust == "Speedo C/O Dawson Logistics"){
- $email_rec = "dlspeedooutbound@dawsonlogistics.com";
+//  $email_rec = "dlspeedooutbound@dawsonlogistics.com";
+//  $emails_recs = "";
+$email_rec = "developer@seun.me";
  $emails_recs = "";
  }else{
     $subject = $cust." KPI report";
-    $email_rec = "brooksb@dawsonlogistics.com";
-    $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
+    // $email_rec = "brooksb@dawsonlogistics.com";
+    // $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
+$email_rec = "developer@seun.me";
+$emails_recs = "";
  }
     $currentReport = json_encode($array, JSON_PRETTY_PRINT);
     $local_json = "assets/json/last_".$customer.$type.$docType.".json";
     $previousReport = file_exists($local_json) ? file_get_contents($local_json) : '';
-if ($currentReport !== $previousReport && !empty($currentReport)) {
+if (($currentReport !== $previousReport) && ($count_allData > 0)) {
     $this->sendMailSMTP($email_rec, $subject, $html, $emails_recs); echo "<br>". $emails_recs;
     file_put_contents($local_json, $previousReport);
 }else{

@@ -57,9 +57,20 @@ helper('date');
        
 <div class="col-sm-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">View Display</div>
+                <div class="panel-heading">View KPI Report</div>
                 <div class="panel-body">
-                    <form method="GET" id="displayform" action="<?= base_url('display') ?>">
+                    <form method="GET" id="displayform" action="<?= base_url('mail-report2') ?>">
+                    <input type="hidden" name="view" value="html">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Customer</label>
+                            <select name="cust" class="form-control">
+                                <?php foreach($customers as $customer): ?>
+                                  <option value="<?= $customer['cust_id'] ?>"><?= $customer['cust_name'] ?></option>
+                                <?php endforeach;    ?>
+                            </select><br/><br/>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label>Local Time</label>
@@ -86,14 +97,14 @@ helper('date');
     <label>Date to display</label>
     <input type="date" name="displayDate" id="displayDate" class="form-control" value="<?= (!empty(session()->get('displayDate')))?session()->get('displayDate'): date('Y-m-d') ?>" required>
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
     <label>From time</label>
     <input type="time" name="FromTIme" class="form-control" value="<?= (!empty(session()->get('FromTIme')))?session()->get('FromTIme'): "00:00" ?>" required>
 </div>
 <div class="form-group">
     <label>To time</label>
     <input type="time" name="ToTIme" class="form-control" value="<?= (!empty(session()->get('ToTIme')))?session()->get('ToTIme'): "23:59" ?>" required>
-</div>
+</div> -->
 <div class="form-group">
     <label>Interval</label>
     <select name="Interval" class="form-control"><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= ((session()->get('Interval')==60) || empty(session()->get('docType')))?"selected": "" ?>>1 hour</option></select>
@@ -104,7 +115,7 @@ helper('date');
 </div>
 <div class="form-group">
     <label>Type</label>
-    <select name="Type" class="form-control"><option <?= (session()->get('Type')=="Pallet")?"selected": "" ?>>Pallet</option><option <?= ((session()->get('Type')=="Cases") || (empty(session()->get('Type'))))?"selected": "" ?>>Cases</option></select>
+    <select name="type" class="form-control"><option <?= (session()->get('Type')=="Pallet")?"selected": "" ?>>Pallet</option><option <?= ((session()->get('Type')=="Cases") || (empty(session()->get('Type'))))?"selected": "" ?>>Cases</option></select>
 </div>
 <div class="form-group">
     <input type="submit" id="submit-btn-view" value="Submit" class="btn btn-lg btn-success" />
