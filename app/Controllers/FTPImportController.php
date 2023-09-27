@@ -15,12 +15,14 @@ class FTPImportController extends BaseController
 
 $ftp_username = "SPEEDO";
 $ftp_userpass = "Tech5633";
-//$ftp_server = "172.28.208.10";
-$ftp_server = "199.19.210.20"; //public
+$ftp_server = !empty($this->request->getGet('access')) ? "172.28.208.10" : "199.19.210.20";
+//$ftp_server = "172.28.208.10"; //local
+//$ftp_server = "199.19.210.20"; //public
 $ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", "", "Dawson KPI Upload Issue"));
 $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+ftp_pasv($ftp_conn, true) or die("Passive mode failed");
 $filename = !empty($this->request->getGet('half')) ? "fcst0016_".date('m-d')."-23:30.CSV" : "fcst0016_".date('m-d-H', strtotime('+1 hour')).":00.CSV";
-//$filename = "fcst0016_06-09-23:30.CSV";
+//$filename = "fcst0016_09-23-12:00.CSV";
 $local_file = "assets/archive/".$filename;
 //$server_file = "/logimaxedi/Speedo/picking/fcst0016_11-09-22-11:04:01.CSV";
 $server_file = "/logimaxedi/Speedo/picking/".$filename;

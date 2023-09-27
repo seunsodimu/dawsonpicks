@@ -663,7 +663,7 @@ $email->addContent(
 "text/html", $message
 );
 
-$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY1'));
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY_LOC'));
 try {
 $response = $sendgrid->send($email);
 return ($response->statusCode());
@@ -1302,21 +1302,19 @@ public function mailReportTest()
      $html = $top.$link.$table_head.$table_body.$table_foot.$summary.$bottom;
 
  if($cust == "Speedo C/O Dawson Logistics"){
-//  $email_rec = "dlspeedooutbound@dawsonlogistics.com";
-//  $emails_recs = "";
-$email_rec = "developer@seun.me";
+ $email_rec = "dlspeedooutbound@dawsonlogistics.com";
  $emails_recs = "";
+
  }else{
     $subject = $cust." KPI report";
-    // $email_rec = "brooksb@dawsonlogistics.com";
-    // $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
-$email_rec = "developer@seun.me";
-$emails_recs = "";
+     $email_rec = "brooksb@dawsonlogistics.com";
+     $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
  }
     $currentReport = json_encode($array, JSON_PRETTY_PRINT);
     $local_json = "assets/json/last_".$customer.$type.$docType.".json";
     $previousReport = file_exists($local_json) ? file_get_contents($local_json) : '';
 if (($currentReport !== $previousReport) && ($count_allData > 0)) {
+   // $this->send_email($html, $subject, "seun.sodimu@gmail.com", "Seun Sodimu", "", "", "developer@seun.me", "Dawson Reports", "", "", "", "", "");
     $this->sendMailSMTP($email_rec, $subject, $html, $emails_recs); echo "<br>". $emails_recs;
     file_put_contents($local_json, $previousReport);
 }else{
