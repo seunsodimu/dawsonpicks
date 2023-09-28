@@ -2,5 +2,5 @@ sendgrid.env
 dawsonpicks.dawsonlogistics.com
 .env
 .htaccess
-writable/*
-assets/archives/*
+writable/
+assets/archives/
