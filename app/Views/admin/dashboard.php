@@ -65,8 +65,14 @@ helper('date');
                         <div class="col-md-12">
                             <label>Customer</label>
                             <select name="cust" class="form-control">
-                                <?php foreach($customers as $customer): ?>
-                                  <option value="<?= $customer['cust_id'] ?>"><?= $customer['cust_name'] ?></option>
+                                <?php foreach($customers as $customer): 
+                                    if($customer['cust_id']==session()->get('customer')){
+                                        $selectedcust = "selected";
+                                    }else{
+                                        $selectedcust = "";
+                                    }
+                                    ?>
+                                  <option value="<?= $customer['cust_id'] ?>" <?= $selectedcust ?>><?= $customer['cust_name'] ?></option>
                                 <?php endforeach;    ?>
                             </select><br/><br/>
                         </div>
@@ -75,21 +81,22 @@ helper('date');
                         <div class="col-md-6">
                             <label>Local Time</label>
                             <select name="localTime" class="form-control">
-                            <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US & Canada)</option>
-<option value="America/Denver">(GMT-07:00) Mountain Time (US & Canada)</option>
-<option value="America/Dawson_Creek">(GMT-07:00) Arizona</option>
-<option value="America/Chicago" selected>(GMT-06:00) Central Time (US & Canada)</option>
-<option value="America/New_York">(GMT-05:00) Eastern Time (US & Canada)</option>        
+<option value="America/Chicago" selected <?= (session()->get('dataTime')=='America/Chicago') ? " selected" : "" ?>>(GMT-06:00) Central Time (US & Canada)</option>
+<option value="America/Los_Angeles" <?= (session()->get('dataTime')=='America/Los_Angeles') ? " selected" : "" ?>>(GMT-08:00) Pacific Time (US & Canada)</option>
+<option value="America/Denver" <?= (session()->get('dataTime')=='America/Denver') ? " selected" : "" ?>>(GMT-07:00) Mountain Time (US & Canada)</option>
+<option value="America/Dawson_Creek" <?= (session()->get('dataTime')=='America/Dawson_Creek') ? " selected" : "" ?>>(GMT-07:00) Arizona</option>
+<option value="America/New_York" <?= (session()->get('dataTime')=='America/New_York') ? " selected" : "" ?>>(GMT-05:00) Eastern Time (US & Canada)</option>        
                         </select>
                         </div>
                         <div class="col-md-6">
                             <label>Data Time</label>
                             <select name="dataTime" class="form-control">
-                            <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US & Canada)</option>
-<option value="America/Denver">(GMT-07:00) Mountain Time (US & Canada)</option>
-<option value="America/Dawson_Creek">(GMT-07:00) Arizona</option>
-<option value="America/Chicago">(GMT-06:00) Central Time (US & Canada)</option>
-<option value="America/New_York" selected>(GMT-05:00) Eastern Time (US & Canada)</option>        
+<option value="America/New_York" <?= (session()->get('dataTime')=='America/New_York') ? " selected" : "" ?>>(GMT-05:00) Eastern Time (US & Canada)</option>               
+<option value="America/Los_Angeles" <?= (session()->get('dataTime')=='America/Los_Angeles') ? " selected" : "" ?>>(GMT-08:00) Pacific Time (US & Canada)</option>
+<option value="America/Denver" <?= (session()->get('dataTime')=='America/Denver') ? " selected" : "" ?>>(GMT-07:00) Mountain Time (US & Canada)</option>
+<option value="America/Dawson_Creek" <?= (session()->get('dataTime')=='America/Dawson_Creek') ? " selected" : "" ?>>(GMT-07:00) Arizona</option>
+<option value="America/Chicago" <?= (session()->get('dataTime')=='America/Chicago') ? " selected" : "" ?>>(GMT-06:00) Central Time (US & Canada)</option>
+
                         </select>
                         </div>
                     </div><br/>

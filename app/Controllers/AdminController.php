@@ -749,9 +749,9 @@ function sendMailIN() {
     
     public function mailReportInv()
 {
-    require_once 'assets/dompdf/autoload.inc.php';
+    //require_once 'assets/dompdf/autoload.inc.php';
         $pick = new PickModel();
-        $dompdf = new \Dompdf\Dompdf();
+        //$dompdf = new \Dompdf\Dompdf();
         $mail_settings = $pick->mailReportSettings();
         $mailset = json_decode($mail_settings[0]->settings, true); 
         $displayDate = ($mailset['displayDate'] == 'current') ? date('Y-m-d') : date('Y-m-d', strtotime($mailset['displayDate']));
@@ -796,7 +796,7 @@ function sendMailIN() {
             $table_body .="<tr><td>".$time['start']."</td>";
             $time_count =0;
             foreach($pickers as $picks):
-                $count = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDat, $this->request->getVar()['cust']);
+                $count = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate, $this->request->getVar()['cust']);
                 $bg = $this->tdColor($count);
                 $table_body .= "<td align='center'".$bg.">".$count."</td>";
                 $time_count = $time_count + $count;
@@ -808,7 +808,8 @@ function sendMailIN() {
     $table_body .="</tbody>";
     $table_foot = "<tfoot><tr><th>Picker Total</th>";
     foreach($pickers as $pick):
-        $tot_count = $this->pickerTotal($array, $pick, $displayDate);
+        $resi = $this->pickerHoursWorked($pick, $mailset['Interval'], $mailset['FromTIme'], $mailset['ToTIme'], $displayDate, $type, $mailset['docType'], $cust);
+        $tot_count = $resi['total'];
         $bg3 = $this->tdColor($tot_count);
         $table_foot .= "<th".$bg3.">".$tot_count."</th>";
         endforeach;
@@ -849,7 +850,13 @@ function sendMailIN() {
         $data['customer'] = $cust;
         $data['type'] = $type;
         $data['date'] = $displayDate;
-        $data['layout'] = base_url()."/mail-report2?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type'];
+        $getVars = $this->request->getVar();
+        $url_params ="";
+        foreach($getVars as $key=>$value):
+            $url_params .=$key."=".$value."&";
+            endforeach; 
+            $url_params = rtrim($url_params, "&");
+        $data['layout'] = base_url()."/mail-report2?".$url_params;
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
         return view("admin/display3", $data);
@@ -1224,10 +1231,24 @@ public function mailReportTest()
         $mailset['docType'] = !isset($this->request->getVar()['docType']) ? $mailset['docType'] : $this->request->getVar()['docType'];
         $docType = $mailset['docType'];
         $customer = isset($this->request->getVar()['cust']) ? $this->request->getVar()['cust'] : 1;
+        $mailset['dataTime'] = isset($this->request->getVar()['dataTime']) ? $this->request->getVar()['dataTime'] : $mailset['dataTime'];
+        $mailset['localTime'] = isset($this->request->getVar()['localTime']) ? $this->request->getVar()['localTime'] : $mailset['localTime'];
+//set session variables
+$getdata = [
+    'displayDate'=>$displayDate,
+    'Interval'=>$mailset['Interval'],
+    'type'=>$type,
+    'docType'=>$docType,
+    'customer'=>$customer,
+    'dataTime'=>$mailset['dataTime'],
+    'localTime'=>$mailset['localTime']
+];
+    session()->set($getdata);
+
         $cust = $this->getCustomerName($customer); 
         $array = $pick->getAllData($displayDate, $type, $mailset['docType'], $cust);
         
-       $times = $this->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
+        $times = $this->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
         $pickers = [];
       
             foreach ($array as $item) {
@@ -1349,7 +1370,13 @@ if (($currentReport !== $previousReport) && ($count_allData > 0)) {
         $data['type'] = $type;
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
-        $data['layout'] = base_url()."/mail-report-rev?view=html&cust=".$this->request->getVar()['cust']."&type=".$this->request->getVar()['type']."&docType=".$docType;
+        $getVars = $this->request->getVar();
+        $url_params ="";
+        foreach($getVars as $key=>$value):
+            $url_params .=$key."=".$value."&";
+            endforeach; 
+            $url_params = rtrim($url_params, "&");
+        $data['layout'] = base_url()."/mail-report-rev?".$url_params;
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
         return view("admin/display3", $data);
