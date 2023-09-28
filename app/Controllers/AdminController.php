@@ -849,6 +849,7 @@ function sendMailIN() {
         $data['title'] = "KPI Report";
         $data['customer'] = $cust;
         $data['type'] = $type;
+        $data['docType'] = $mailset['docType'];
         $data['date'] = $displayDate;
         $getVars = $this->request->getVar();
         $url_params ="";

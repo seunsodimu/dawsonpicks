@@ -21,42 +21,6 @@ helper('date');
         </div>
         <div class="col-sm-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">Upload FIle</div>
-                <div class="panel-body">
-                   <?php
- 
- if(!empty($session->getFlashdata('message'))){ 
-    echo "<div class='alert ".$session->getFlashdata('alert_class')."'>".$session->getFlashdata('message')."</div>"; };
-?>
-
-<form id="upload-form" action="<?= base_url('import-file');?>" method="post" enctype="multipart/form-data">
-    <label><input type="checkbox" name="Overwrite" value="Yes" checked> Overwrite if data for selected date exists </label>
-    <span><br>(All data for the date selected will be removed and replaced by the new uploaded data)</span>
-<br> <br>
-<div class="form-group">
-<label>Select Date</label>
-<input type="date" name="data_date" class="form-control" required>
-</div>
-<div class="form-group">
-    Upload csv file : 
-    <input type="file" name="file" value="" required /><br><br>
-    <input type="submit" name="submit" id="submit-btn" value="Upload" class="btn btn-lg btn-success" />
-    <span id="upldn-msg" style="display: none;">
-    Uploading <i class="fa fa-spinner fa-fw fa-xl margin-right-md fa-spin" style="color: var(--white); --fa-animation-duration:2s;"></i>
-</span>
-</div>
-
-</form>
-                </div>
-            </div>
-        </div>
-
-        
-    </div>
-   <div class="row">
-       
-<div class="col-sm-6">
-            <div class="panel panel-primary">
                 <div class="panel-heading">View KPI Report</div>
                 <div class="panel-body">
                     <form method="GET" id="displayform" action="<?= base_url('mail-report2') ?>">
@@ -104,14 +68,6 @@ helper('date');
     <label>Date to display</label>
     <input type="date" name="displayDate" id="displayDate" class="form-control" value="<?= (!empty(session()->get('displayDate')))?session()->get('displayDate'): date('Y-m-d') ?>" required>
 </div>
-<!-- <div class="form-group">
-    <label>From time</label>
-    <input type="time" name="FromTIme" class="form-control" value="<?= (!empty(session()->get('FromTIme')))?session()->get('FromTIme'): "00:00" ?>" required>
-</div>
-<div class="form-group">
-    <label>To time</label>
-    <input type="time" name="ToTIme" class="form-control" value="<?= (!empty(session()->get('ToTIme')))?session()->get('ToTIme'): "23:59" ?>" required>
-</div> -->
 <div class="form-group">
     <label>Interval</label>
     <select name="Interval" class="form-control"><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= ((session()->get('Interval')==60) || empty(session()->get('docType')))?"selected": "" ?>>1 hour</option></select>
@@ -132,8 +88,47 @@ helper('date');
                 </div>
             </div>
         </div>
+        
+        
+     
 
-        <div class="col-sm-6">
+        
+    </div>
+   <div class="row">
+   <!-- <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Upload FIle</div>
+                <div class="panel-body">
+                   <?php
+ 
+ if(!empty($session->getFlashdata('message'))){ 
+    echo "<div class='alert ".$session->getFlashdata('alert_class')."'>".$session->getFlashdata('message')."</div>"; };
+?>
+
+<form id="upload-form" action="<?= base_url('import-file');?>" method="post" enctype="multipart/form-data">
+    <label><input type="checkbox" name="Overwrite" value="Yes" checked> Overwrite if data for selected date exists </label>
+    <span><br>(All data for the date selected will be removed and replaced by the new uploaded data)</span>
+<br> <br>
+<div class="form-group">
+<label>Select Date</label>
+<input type="date" name="data_date" class="form-control" required>
+</div>
+<div class="form-group">
+    Upload csv file : 
+    <input type="file" name="file" value="" required /><br><br>
+    <input type="submit" name="submit" id="submit-btn" value="Upload" class="btn btn-lg btn-success" />
+    <span id="upldn-msg" style="display: none;">
+    Uploading <i class="fa fa-spinner fa-fw fa-xl margin-right-md fa-spin" style="color: var(--white); --fa-animation-duration:2s;"></i>
+</span>
+</div>
+
+</form>
+                </div>
+            </div>
+        </div>   -->
+
+
+        <!-- <div class="col-sm-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Selector Display</div>
                 <div class="panel-body">
@@ -203,12 +198,11 @@ helper('date');
 
 <div class="form-group">
     <input type="submit" id="submit-btn-view" value="Submit" class="btn btn-lg btn-success" />
-    <!--<input type="reset" id="reset-btn-view" value="Reset" class="btn btn-lg btn-danger" />-->
 </div>
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
 
    </div>
 </div>
