@@ -8,6 +8,19 @@
   <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/b-2.3.6/b-html5-2.3.6/cr-1.6.2/fc-4.2.2/fh-3.3.2/sp-2.1.2/datatables.min.css" rel="stylesheet"/>
 
   <style type="text/css">
+    .r-count {
+      font-size: 1.2rem;
+    }
+    .num-count-txt{
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: green;
+    }
+    .zerocount-txt{
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: red;
+    }
     .num-count {
       background-color: green;
       color: #ffffff;
@@ -18,10 +31,40 @@
       background-color: red;
       color: #FFFFFF;
     }
+    .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    z-index: 1000;
+}
+
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
   </style>
 </head>
 <body>
-
+<div id="spinnerOverlay" class="overlay">
+        <div class="spinner"></div>
+    </div>
    <?= $this->renderSection("body") ?>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -38,7 +81,6 @@
   <script type="text/javascript">
 
 $(document).ready(function() {
-
     $('#rowtbl1').DataTable( {
         iDisplayLength: 200,
         fixedColumns: {
@@ -173,7 +215,9 @@ $("#reset-btn-view").click(function(){
     $("#refresh-txt").text('Refreshing...');
     location.reload();
 });
-
+$("#showSpinner").click(function() {
+    $("#spinnerOverlay").show();
+});
 } );
 </script>
 </body>

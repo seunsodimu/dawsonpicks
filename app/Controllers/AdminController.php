@@ -651,14 +651,6 @@ public function send_email($message, $subject, $to, $to_name, $to1, $to_name1, $
     $email->setFrom($from, $from_name);
 $email->setSubject($subject);
 $email->addTo($to, $to_name);
-//$email->addCc($to1, $to_name1);
-// $email->addCc('Damian.Williams@dawsonlogistics.com', 'Damian Williams');
-// $email->addCc('jim.lafoe@dawsonlogistics.com', 'Jim Lafoe');
-// $email->addCc('brooksb@dawsonlogistics.com', 'Brooks Bennett-Miller');
-// $email->addCc('ander.cruz@dawsonlogistics.com', 'Ander Cruz');
- //$email->addCc('dennisb@dawsonlogistics.com', 'Dennis Brinkhus');
- //$email->addCc('seun.sodimu@gmail.com', 'Seun Sodimu');
-//$email->addCc('', 'DL Speedo Team');
 $email->addContent(
 "text/html", $message
 );

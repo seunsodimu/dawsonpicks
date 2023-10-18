@@ -247,6 +247,18 @@ public function countPickSelector($picker, $date1, $date2, $start, $end, $type, 
         $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
         return $data;
   }
+
+  public function getAllCasesPallets($date, $type, $docType, $cust){ 
+    $builder = $this->db->table('pick_upload_temp');
+      $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty, new_type');
+      $builder->where('start_date', $date);
+      $builder->where('cust_name', $cust);
+      $builder->where('doc_type', $docType);
+      $builder->orderBy('picker ASC, complete_time DESC');
+     // $builder->limit(100);
+      $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
+      return $data;
+}
   
 
 }

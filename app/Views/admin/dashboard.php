@@ -81,7 +81,7 @@ helper('date');
     <select name="type" class="form-control"><option <?= (session()->get('Type')=="Pallet")?"selected": "" ?>>Pallet</option><option <?= ((session()->get('Type')=="Cases") || (empty(session()->get('Type'))))?"selected": "" ?>>Cases</option></select>
 </div>
 <div class="form-group">
-    <input type="submit" id="submit-btn-view" value="Submit" class="btn btn-lg btn-success" />
+    <input type="submit" id="submit-btn-view" value="Submit" class="btn btn-lg btn-success showSpinner" />
     <!--<input type="reset" id="reset-btn-view" value="Reset" class="btn btn-lg btn-danger" />-->
 </div>
                     </form>
@@ -95,7 +95,7 @@ helper('date');
         
     </div>
    <div class="row">
-   <!-- <div class="col-sm-6">
+   <div class="col-sm-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Upload FIle</div>
                 <div class="panel-body">
@@ -125,10 +125,10 @@ helper('date');
 </form>
                 </div>
             </div>
-        </div>   -->
+        </div>  
 
 
-        <!-- <div class="col-sm-6">
+        <div class="col-sm-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">Selector Display</div>
                 <div class="panel-body">
@@ -202,7 +202,7 @@ helper('date');
                     </form>
                 </div>
             </div>
-        </div> -->
+        </div>
 
    </div>
 </div>

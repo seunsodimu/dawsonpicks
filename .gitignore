@@ -3,4 +3,4 @@ dawsonpicks.dawsonlogistics.com
 .env
 .htaccess
 writable/
-assets/archives/
+assets/archives/*
