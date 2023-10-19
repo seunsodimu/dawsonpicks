@@ -106,7 +106,7 @@ class QuadrantController extends BaseController
         $table_foot .= "<th" . $bg4 . ">" . $count_allData . "</th>";
         $table_foot .= "</tr></tfoot></table>";
 
-        $data['title'] = "KPI Report";
+        $data['title'] = "KPI Quad Report";
         $data['customer'] = $cust;
         $data['type'] = $type;
         $data['date'] = $displayDate;
@@ -114,7 +114,21 @@ class QuadrantController extends BaseController
         $data['layout'] = base_url() . "/mail-report-rev?";
         $data['table'] = $table_head . $table_body . $table_foot;
         $data['summary'] = "";
+        if($this->request->getGet()['type'] == 'view'){
         return view('admin/display3', $data);
+        }else{
+            $top = "<html><head><meta charset='UTF-8'><title>KPI Tool</title></head><body>";
+    //  $top .="<p><strong>Type:</strong> ".ucfirst($type)."</p>";
+     $top .="<p><strong>Pick/Putaway:</strong> ".ucfirst($mailset['docType'])."</p>";
+     $top .="<p><strong>Customer:</strong> ".$cust."</p>";
+     $top .="<p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
+     $bottom =     "</body></html>";
+        $html = $top.$table_head.$table_body.$table_foot.$bottom;
+     $subject = $cust." KPI report (Quadrant Display)";
+     $email_rec = "seun.sodimu@dawsonlogistics.com";
+     $emails_recs = "";
+     $admin->sendMailSMTP($email_rec, $subject, $html, $emails_recs); 
+        }
     }
 
     public function pickerCountPerInterval($allData, $picker, $start, $end, $data_time, $local_time, $date, $cust)
