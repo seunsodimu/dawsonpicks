@@ -55,8 +55,8 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                     
 //var_dump( $filedata[8]); exit;
                      $date5 = date('Y-m-d', strtotime($filedata[7]));
-                     $date7 = date('Y-m-d', strtotime($filedata[8]));
-                     $time6 = date('H:i:s', strtotime($filedata[9]));
+                     $date7 = date('Y-m-d', strtotime($filedata[9]));
+                     $time6 = date('H:i:s', strtotime($filedata[8]));
                      $time8 = date('H:i:s', strtotime($filedata[10]));
 
                      $importData_arr[$i]['store_no'] = $filedata[0];
@@ -64,6 +64,8 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                      $importData_arr[$i]['item_no'] = $filedata[2];
                      $importData_arr[$i]['storers_lot_no'] = $filedata[3];
                      $importData_arr[$i]['doc_no'] = $filedata[4];
+                     $importData_arr[$i]['consignee'] = $filedata[5];
+                     $importData_arr[$i]['caselabel'] = $filedata[6];
                      $importData_arr[$i]['start_date'] =$date5;
                      $importData_arr[$i]['start_time'] = $time6;
                      $importData_arr[$i]['complete_date'] = $date7;
@@ -286,8 +288,8 @@ $email->send();
                      
  //var_dump( $filedata[8]); exit;
                       $date5 = date('Y-m-d', strtotime($filedata[7]));
-                      $date7 = date('Y-m-d', strtotime($filedata[8]));
-                      $time6 = date('H:i:s', strtotime($filedata[9]));
+                      $date7 = date('Y-m-d', strtotime($filedata[9]));
+                      $time6 = date('H:i:s', strtotime($filedata[8]));
                       $time8 = date('H:i:s', strtotime($filedata[10]));
  
                       $importData_arr[$i]['store_no'] = $filedata[0];
@@ -295,6 +297,8 @@ $email->send();
                       $importData_arr[$i]['item_no'] = $filedata[2];
                       $importData_arr[$i]['storers_lot_no'] = $filedata[3];
                       $importData_arr[$i]['doc_no'] = $filedata[4];
+                      $importData_arr[$i]['consignee'] = $filedata[5];
+                      $importData_arr[$i]['caselabel'] = $filedata[6];
                       $importData_arr[$i]['start_date'] =$date5;
                       $importData_arr[$i]['start_time'] = $time6;
                       $importData_arr[$i]['complete_date'] = $date7;

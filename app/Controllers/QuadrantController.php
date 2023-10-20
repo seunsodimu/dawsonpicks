@@ -67,11 +67,12 @@ class QuadrantController extends BaseController
                 $bg1 = ($countx['pallets']) > 0 ? "num-count" : "zerocount";
                 $bg2 = ($countx['cases']) > 0 ? "num-count" : "zerocount";
                 $bg3 = ($countx['cases_on_pallet']) > 0 ? "num-count" : "zerocount";
+                $bg4 = ($countx['caselabel']) > 0 ? "num-count" : "zerocount";
                 $table_body .= "<td>";
                 $table_body .= "<table width=100% cellspacing=0 cellpadding=0>";
                 $table_body .= "<tr>";
                 $table_body .= "<td class='" . $bg2 . "'>" . $countx['cases'] . "</td>";
-                $table_body .= "<td class='zerocount'>0</td>";
+                $table_body .= "<td class='" . $bg4 . "'>" . $countx['caselabel'] . "</td>";
                 $table_body .= "</tr>";
                 $table_body .= "<tr>";
                 $table_body .= "<td class='" . $bg1 . "'>" . $countx['pallets'] . "</td>";
@@ -148,18 +149,12 @@ class QuadrantController extends BaseController
         }
         $start->modify('-1 second');
         $start = $start->format('H:i');
-
-        //$start = new \DateTime($start, new \DateTimeZone($data_time));
-        //$start->setTimeZone(new \DateTimeZone($local_time));
-
-        //$end = new \DateTime($end, new \DateTimeZone($data_time));
-        //$end->setTimeZone(new \DateTimeZone($local_time));
-        //   var_dump($start." - ".$end); exit;
         $count = [];
         $all_count = 0;
         $pallet_count = 0;
         $cases_count = 0;
         $cases_on_pallet = 0;
+        $case_labelled = 0;
         foreach ($allData as $data):
             $complete = $data->start_time;
             $complete = new \DateTime($complete, new \DateTimeZone($data_time));
@@ -170,13 +165,16 @@ class QuadrantController extends BaseController
             if (($data->picker == $picker) && ($start <= $complete) && ($complete <= $end)) {
                 if (($cust == 2) && ($data->new_type == 'cases')) {
                     $cases_count += abs($data->transaction_qty);
+                    if(strtoupper($data->caselabel) != "*NONE"){
+                        $case_labelled += abs($data->transaction_qty);
+                    }
                 } elseif (($cust == 2) && ($data->new_type == 'pallet')) {
                     $pallet_count++;
                     $cases_on_pallet += abs($data->transaction_qty);
                 }
             }
         endforeach;
-        $count = array('pallets' => $pallet_count, 'cases' => $cases_count, 'cases_on_pallet' => $cases_on_pallet);
+        $count = array('pallets' => $pallet_count, 'cases' => $cases_count, 'cases_on_pallet' => $cases_on_pallet, 'caselabel' => $case_labelled);
         return $count;
     }
 

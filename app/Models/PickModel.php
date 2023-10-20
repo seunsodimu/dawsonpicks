@@ -8,7 +8,7 @@ class PickModel extends Model
     protected $table = 'pick_upload_temp';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-      'store_no', 'lot_no', 'item_no', 'storers_lot_no', 'doc_no', 'start_date', 'start_time', 'complete_date', 'complete_time', 'picker', 'pallet', 'doc_type', 'reason', 'full_desc', 'cust_name', 'ship_to_rec_from', 'transaction_qty', 'upload_by', 'upload_date', 'new_type'
+      'store_no', 'lot_no', 'item_no', 'storers_lot_no', 'doc_no', 'start_date', 'start_time', 'complete_date', 'complete_time', 'picker', 'pallet', 'doc_type', 'reason', 'full_desc', 'cust_name', 'ship_to_rec_from', 'transaction_qty', 'upload_by', 'upload_date', 'new_type', 'consignee', 'caselabel'
     ];
 
 
@@ -250,7 +250,7 @@ public function countPickSelector($picker, $date1, $date2, $start, $end, $type, 
 
   public function getAllCasesPallets($date, $type, $docType, $cust){ 
     $builder = $this->db->table('pick_upload_temp');
-      $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty, new_type');
+      $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty, new_type, caselabel');
       $builder->where('start_date', $date);
       $builder->where('cust_name', $cust);
       $builder->where('doc_type', $docType);
