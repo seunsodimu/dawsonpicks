@@ -54,10 +54,10 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                   if($i > 1 && $num == $numberOfFields){ 
                     
 //var_dump( $filedata[8]); exit;
-                     $date5 = date('Y-m-d', strtotime($filedata[5]));
-                     $date7 = date('Y-m-d', strtotime($filedata[7]));
-                     $time6 = date('H:i:s', strtotime($filedata[6]));
-                     $time8 = date('H:i:s', strtotime($filedata[8]));
+                     $date5 = date('Y-m-d', strtotime($filedata[7]));
+                     $date7 = date('Y-m-d', strtotime($filedata[8]));
+                     $time6 = date('H:i:s', strtotime($filedata[9]));
+                     $time8 = date('H:i:s', strtotime($filedata[10]));
 
                      $importData_arr[$i]['store_no'] = $filedata[0];
                      $importData_arr[$i]['lot_no'] = $filedata[1];
@@ -68,14 +68,14 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                      $importData_arr[$i]['start_time'] = $time6;
                      $importData_arr[$i]['complete_date'] = $date7;
                      $importData_arr[$i]['complete_time'] = $time8;
-                     $importData_arr[$i]['picker'] = $filedata[9];
-                     $importData_arr[$i]['pallet'] = $filedata[10];
-                     $importData_arr[$i]['doc_type'] = $filedata[11];
-                     $importData_arr[$i]['reason'] = $filedata[12];
-                     $importData_arr[$i]['full_desc'] = $filedata[13];
-                     $importData_arr[$i]['cust_name'] = $filedata[14];
-                     $importData_arr[$i]['ship_to_rec_from'] = $filedata[15];
-                     $importData_arr[$i]['transaction_qty'] = $filedata[16];
+                     $importData_arr[$i]['picker'] = $filedata[11];
+                     $importData_arr[$i]['pallet'] = $filedata[12];
+                     $importData_arr[$i]['doc_type'] = $filedata[13];
+                     $importData_arr[$i]['reason'] = $filedata[14];
+                     $importData_arr[$i]['full_desc'] = $filedata[15];
+                     $importData_arr[$i]['cust_name'] = $filedata[16];
+                     $importData_arr[$i]['ship_to_rec_from'] = $filedata[17];
+                     $importData_arr[$i]['transaction_qty'] = $filedata[18];
                     $importData_arr[$i]['upload_by'] = 'scheduled';
 
                     ////pallet and cases
@@ -285,10 +285,10 @@ $email->send();
                    if($i > 1 && $num == $numberOfFields){ 
                      
  //var_dump( $filedata[8]); exit;
-                      $date5 = date('Y-m-d', strtotime($filedata[5]));
-                      $date7 = date('Y-m-d', strtotime($filedata[7]));
-                      $time6 = date('H:i:s', strtotime($filedata[6]));
-                      $time8 = date('H:i:s', strtotime($filedata[8]));
+                      $date5 = date('Y-m-d', strtotime($filedata[7]));
+                      $date7 = date('Y-m-d', strtotime($filedata[8]));
+                      $time6 = date('H:i:s', strtotime($filedata[9]));
+                      $time8 = date('H:i:s', strtotime($filedata[10]));
  
                       $importData_arr[$i]['store_no'] = $filedata[0];
                       $importData_arr[$i]['lot_no'] = $filedata[1];
@@ -299,14 +299,14 @@ $email->send();
                       $importData_arr[$i]['start_time'] = $time6;
                       $importData_arr[$i]['complete_date'] = $date7;
                       $importData_arr[$i]['complete_time'] = $time8;
-                      $importData_arr[$i]['picker'] = $filedata[9];
-                      $importData_arr[$i]['pallet'] = $filedata[10];
-                      $importData_arr[$i]['doc_type'] = $filedata[11];
-                      $importData_arr[$i]['reason'] = $filedata[12];
-                      $importData_arr[$i]['full_desc'] = $filedata[13];
-                      $importData_arr[$i]['cust_name'] = $filedata[14];
-                      $importData_arr[$i]['ship_to_rec_from'] = $filedata[15];
-                      $importData_arr[$i]['transaction_qty'] = $filedata[16];
+                      $importData_arr[$i]['picker'] = $filedata[11];
+                      $importData_arr[$i]['pallet'] = $filedata[12];
+                      $importData_arr[$i]['doc_type'] = $filedata[13];
+                      $importData_arr[$i]['reason'] = $filedata[14];
+                      $importData_arr[$i]['full_desc'] = $filedata[15];
+                      $importData_arr[$i]['cust_name'] = $filedata[16];
+                      $importData_arr[$i]['ship_to_rec_from'] = $filedata[17];
+                      $importData_arr[$i]['transaction_qty'] = $filedata[18];
                      $importData_arr[$i]['upload_by'] = 'scheduled';
                      if((str_contains($filedata[15], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
                          $importData_arr[$i]['new_type'] = 'pallet';
