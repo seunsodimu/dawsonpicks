@@ -42,7 +42,7 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                $file = fopen($local_file,"r"); //var_dump($file); exit;
                //$file = fopen($file_path, "r"); var_dump($file); exit;
                $i = 0;
-               $numberOfFields = 22; // Total number of fields
+               $numberOfFields = 24; // Total number of fields
 
                $importData_arr = array();
 
@@ -120,7 +120,7 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                         echo "not inserted";
                      }                                 
                  }
-                 echo $count." : ".$date5." : ".$filename;
+                 echo $count." : ".$date5." :- ".$filename;
                  $this->notifyAdmin("Uploaded ".$count." rows from ".$server_file, "developer@seun.me", "", "KPI Upload Details");
 
   }
