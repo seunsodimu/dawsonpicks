@@ -109,10 +109,10 @@ class QuadrantController extends BaseController
 
         $data['title'] = "KPI Quad Report";
         $data['customer'] = $cust;
-        $data['type'] = $type;
+        $data['type'] = "Four Square";
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
-        $data['layout'] = base_url() . "/mail-report-rev?";
+        $data['layout'] = "";
         $data['table'] = $table_head . $table_body . $table_foot;
         $data['summary'] = "";
         if($this->request->getGet()['type'] == 'view'){
@@ -170,7 +170,7 @@ class QuadrantController extends BaseController
                     $pallet_count++;
                     $cases_on_pallet += abs($data->transaction_qty);
                 }
-                if(strtoupper($data->caselabel) != "*NONE"){
+                if(strtoupper(trim($data->caselabel)) != "*NONE"){
                     $case_labelled += abs($data->transaction_qty);
                 }
             }

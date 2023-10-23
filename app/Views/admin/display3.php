@@ -15,7 +15,11 @@
 <p><strong>Type: </strong><?= ucfirst($type) ?></p>
 <p><strong>Document Type: </strong><?= ucfirst($docType) ?></p>
 <p><strong>Report Date: </strong> <?= $date ?></p>
-<p><a href="<?= base_url() ?>/admin"> <i class="fa fa-home"></i> Home</a> | <a href="<?= $layout ?>"><i class="fa fa-recycle"></i> Rotate</a></p>
+<p><a href="<?= base_url() ?>/admin"> <i class="fa fa-home"></i> Home</a> | 
+<?php if($layout != ""): ?>
+    <a href="<?= $layout ?>"><i class="fa fa-recycle"></i> Rotate</a>
+<?php endif; ?>
+</p>
    <div class="col-sm-12"> 
    <?= $table ?>
    </div>

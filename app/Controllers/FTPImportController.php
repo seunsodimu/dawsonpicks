@@ -22,18 +22,19 @@ $ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_
 $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
 ftp_pasv($ftp_conn, true) or die("Passive mode failed");
 $filename = !empty($this->request->getGet('half')) ? "fcst0016_".date('m-d')."-23:30.CSV" : "fcst0016_".date('m-d-H', strtotime('+1 hour')).":00.CSV";
-//$filename = "fcst0016_09-23-12:00.CSV";
+//$filename = "fcst0016_10-20-23:30.CSV";
 $local_file = "assets/archive/".$filename;
-//$server_file = "/logimaxedi/Speedo/picking/fcst0016_11-09-22-11:04:01.CSV";
+//$server_file = "/logimaxedi/Speedo/picking/fcst0016_10-20-23_30.CSV";
 $server_file = "/logimaxedi/Speedo/picking/".$filename;
 //var_dump( $server_file); exit;
 // download server file
 $file_list = ftp_nlist($ftp_conn, "/logimaxedi/Speedo/picking/");
 //var_dump($file_list); exit;
-if (in_array($server_file, $file_list)) {
+if (in_array($server_file, $file_list)) { 
+     echo "Found file ". $local_file."...<br>";
 if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
   {
- // echo "Successfully written to $local_file.";
+  echo "Successfully written to ".$local_file."...<br>";
 
            
 
