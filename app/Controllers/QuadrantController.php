@@ -165,12 +165,13 @@ class QuadrantController extends BaseController
             if (($data->picker == $picker) && ($start <= $complete) && ($complete <= $end)) {
                 if (($cust == 2) && ($data->new_type == 'cases')) {
                     $cases_count += abs($data->transaction_qty);
-                    if(strtoupper($data->caselabel) != "*NONE"){
-                        $case_labelled += abs($data->transaction_qty);
-                    }
+                    
                 } elseif (($cust == 2) && ($data->new_type == 'pallet')) {
                     $pallet_count++;
                     $cases_on_pallet += abs($data->transaction_qty);
+                }
+                if(strtoupper($data->caselabel) != "*NONE"){
+                    $case_labelled += abs($data->transaction_qty);
                 }
             }
         endforeach;
