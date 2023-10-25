@@ -130,7 +130,7 @@ class QuadrantController extends BaseController
             $bg1_3 = $admin->tdColor($county['time_bottom_left']);
             $bg1_4 = $admin->tdColor($county['time_bottom_right']);
             $table_foot .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
-            $table_foot .= "<table width=100% cellspacing=1 cellpadding=1 style='border: 1px solid'>";
+            $table_foot .= "<table width=100% cellspacing=1 cellpadding=1 style='border: 1px solid'>  ";
             $table_foot .= "<tr>";
             $table_foot .= "<td " . $bg1_1 . ">" . $county['time_top_left'] . "</td>";
             $table_foot .= "<td " . $bg1_2 . ">" . $county['time_top_right'] . "</td>";
@@ -180,7 +180,7 @@ class QuadrantController extends BaseController
      $bottom =     "</body></html>";
         $html = $top.$table_head.$table_body.$table_foot.$bottom;
      $subject = $cust." KPI report (Quadrant Display)";
-     $email_rec = "seun.sodimu@gmail.com";
+     $email_rec = "dennisb@dawsonlogistics.com";
      $emails_recs = "";
      $admin->sendMailSMTP($email_rec, $subject, $html, $emails_recs); 
         }
