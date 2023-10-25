@@ -168,15 +168,17 @@ class QuadrantController extends BaseController
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
         $data['layout'] = "";
+        $data['links'] = "https://dawson-reports.com/kpi/quad?type=view";
         $data['table'] = $table_head . $table_body . $table_foot;
         $data['summary'] = "";
         if($this->request->getGet()['type'] == 'view'){
         return view('admin/display3', $data);
         }else{
             $top = "<html><head><meta charset='UTF-8'><title>KPI Tool</title></head><body>";
-     $top .="<p><strong>Pick/Putaway:</strong> ".ucfirst($mailset['docType'])."</p>";
+     $top .="<p><strong>Pick/Putaway:</strong> Four Square</p><p><strong>Pick/Putaway:</strong> ".ucfirst($mailset['docType'])."</p>";
      $top .="<p><strong>Customer:</strong> ".$cust."</p>";
      $top .="<p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
+     $top .="<p><strong>Live link: </strong>https://dawson-reports.com/kpi/quad?type=view&intv=60</p>";
      $bottom =     "</body></html>";
         $html = $top.$table_head.$table_body.$table_foot.$bottom;
      $subject = $cust." KPI report (Quadrant Display)";
