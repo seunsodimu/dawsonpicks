@@ -32,15 +32,16 @@ class QuadrantController extends BaseController
         $mail_settings = $pick->mailReportSettings();
         $admin = new AdminController();
         $mailset = json_decode($mail_settings[0]->settings, true);
+        $mailset['Interval'] = isset($this->request->getGet()['intv']) ? $this->request->getGet()['intv'] : $mailset['Interval'];
         $array = $pick->getAllCasesPallets($displayDate, $type, $mailset['docType'], $cust);
-        //var_dump($array); exit;
+        
         $times = $admin->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
         $data['table'] = "";
         $table_head = "<table id='rowtbl3' width=100% border='1' cellspacing=0 cellpadding=10><thead><tr><th></th>";
         $timeheads = [];
         foreach ($times as $time):
             $table_head .= "<th>" . $time['start'] . "</th>";
-            $timehead = array('time' => $time['start'], 'count' => 0);
+            $timehead = array('time' => $time['start'], 'count' => 0, 'time_top_right' => 0, 'time_top_left' => 0, 'time_bottom_right' => 0, 'time_bottom_left' => 0 );
             array_push($timeheads, $timehead);
         endforeach;
         $table_head .= "<th>Picker Total</th>";
@@ -58,54 +59,108 @@ class QuadrantController extends BaseController
         foreach ($pickers as $picks):
             $table_body .= "<tr><td>" . $picks . "</td>";
             $time_count = 0;
+            $picker_top_left = 0;
+            $picker_top_right = 0;
+            $picker_bottom_left = 0;
+            $picker_bottom_right = 0;
             foreach ($times as $time):
                 $countx = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate, 2);
                 $count = $countx['cases'] + $countx['pallets'];
                 $key = array_search($time['start'], $timehead);
 
-                $bg = $admin->tdColor($count);
-                $bg1 = ($countx['pallets']) > 0 ? "num-count" : "zerocount";
-                $bg2 = ($countx['cases']) > 0 ? "num-count" : "zerocount";
-                $bg3 = ($countx['cases_on_pallet']) > 0 ? "num-count" : "zerocount";
-                $bg4 = ($countx['caselabel']) > 0 ? "num-count" : "zerocount";
-                $table_body .= "<td>";
-                $table_body .= "<table width=100% cellspacing=0 cellpadding=0>";
+                $bg1 = $admin->tdColor($countx['pallets']);
+                $bg2 = $admin->tdColor($countx['cases']);
+                $bg3 = $admin->tdColor($countx['cases_on_pallet']);
+                $bg4 = $admin->tdColor($countx['caselabel']);
+
+                $table_body .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
+                $table_body .= "<table width=100% cellspacing=0 cellpadding=0 class='noborderst'>";
                 $table_body .= "<tr>";
-                $table_body .= "<td class='" . $bg2 . "'>" . $countx['cases'] . "</td>";
-                $table_body .= "<td class='" . $bg4 . "'>" . $countx['caselabel'] . "</td>";
+                $table_body .= "<td " . $bg2 . ">" . $countx['cases'] . "</td>";
+                $table_body .= "<td " . $bg4 . ">" . $countx['caselabel'] . "</td>";
                 $table_body .= "</tr>";
                 $table_body .= "<tr>";
-                $table_body .= "<td class='" . $bg1 . "'>" . $countx['pallets'] . "</td>";
-                $table_body .= "<td class='" . $bg3 . "'>" . $countx['cases_on_pallet'] . "</td>";
+                $table_body .= "<td " . $bg1 . ">" . $countx['pallets'] . "</td>";
+                $table_body .= "<td " . $bg3 . ">" . $countx['cases_on_pallet'] . "</td>";
                 $table_body .= "</tr></table>";
                 $table_body .= "</td>";
+                $picker_top_left += $countx['cases'];
+                $picker_top_right += $countx['caselabel'];
+                $picker_bottom_left += $countx['pallets'];
+                $picker_bottom_right += $countx['cases_on_pallet'];
 
                 $time_count = $time_count + $count;
                 foreach ($timeheads as $key => $timehead):
-                    if (($timehead['time'] == $time['start'])) { //var_dump($count); exit;
-                        //    $timehead1 = array('time'=>$timehead['time'], 'count'=>$count+$timehead['count']);
-                        $timeheads[$key]['count'] = $count + $timehead['count'];
-                        //var_dump($key); echo "<br>"; var_dump($timeheads); exit;
+                    if (($timehead['time'] == $time['start'])) { 
+                        $timeheads[$key]['time_top_left'] += $picker_top_left;
+                        $timeheads[$key]['time_top_right'] += $picker_top_right;
+                        $timeheads[$key]['time_bottom_left'] += $picker_bottom_left;
+                        $timeheads[$key]['time_bottom_right'] += $picker_bottom_right;
                     }
                 endforeach;
             endforeach;
-            $bg2 = $admin->tdColor($time_count);
-            $table_body .= "<td" . $bg2 . ">" . $time_count . "</td>";
+            $bg_1 = $admin->tdColor($picker_top_left);
+            $bg_2 = $admin->tdColor($picker_top_right);
+            $bg_3 = $admin->tdColor($picker_bottom_left);
+            $bg_4 = $admin->tdColor($picker_bottom_right);
+            $table_body .= "<td>";
+            $table_body .= "<table width=100% cellspacing=0 cellpadding=0 class='noborderst'>";
+            $table_body .= "<tr>";
+            $table_body .= "<td " . $bg_1 . ">" . $picker_top_left . "</td>";
+            $table_body .= "<td " . $bg_2 . ">" . $picker_top_right . "</td>";
+            $table_body .= "</tr>";
+            $table_body .= "<tr>";
+            $table_body .= "<td " . $bg_3 . ">" . $picker_bottom_left . "</td>";
+            $table_body .= "<td " . $bg_4 . ">" . $picker_bottom_right . "</td>";
+            $table_body .= "</tr></table>";
+            $table_body .= "</td>";
             $table_body .= "</tr>";
         endforeach;
-        $table_body .= "</tbody>";
-        $table_foot = "<tfoot><tr><th>Time Total</th>";
-        $counts_tol = $admin->timeCounts($times, $array, $displayDate);
-        // var_dump($timeheads); exit;
-        foreach ($timeheads as $time):
-            $tot_count = $time['count'];
-            $bg3 = $admin->tdColor($tot_count);
-            $table_foot .= "<th" . $bg3 . ">" . $tot_count . "</th>";
+        //$table_body .= "</tbody>";
+        $table_foot = "<tr><td>Time Total</td>";
+        $total_top_left = 0;
+        $total_top_right = 0;
+        $total_bottom_left = 0;
+        $total_bottom_right = 0;
+        foreach ($times as $timey):
+            $county = $this->timeCountPerInterval($array, $timey['start'], $timey['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate, 2);
+           
+            $bg1_1 = $admin->tdColor($county['time_top_left']);
+            $bg1_2 = $admin->tdColor($county['time_top_right']);
+            $bg1_3 = $admin->tdColor($county['time_bottom_left']);
+            $bg1_4 = $admin->tdColor($county['time_bottom_right']);
+            $table_foot .= "<td>";
+            $table_foot .= "<table width=100% cellspacing=0 cellpadding=0 class='noborderst'>";
+            $table_foot .= "<tr>";
+            $table_foot .= "<td " . $bg1_1 . ">" . $county['time_top_left'] . "</td>";
+            $table_foot .= "<td " . $bg1_2 . ">" . $county['time_top_right'] . "</td>";
+            $table_foot .= "</tr>";
+            $table_foot .= "<tr>";
+            $table_foot .= "<td " . $bg1_3 . ">" . $county['time_bottom_left'] . "</td>";
+            $table_foot .= "<td " . $bg1_4 . ">" . $county['time_bottom_right'] . "</td>";
+            $table_foot .= "</tr></table>";
+            $table_foot .= "</td>";
+            $total_top_left += $county['time_top_left'];
+            $total_top_right += $county['time_top_right'];
+            $total_bottom_left += $county['time_bottom_left'];
+            $total_bottom_right += $county['time_bottom_right'];
         endforeach;
-        $count_allData = $admin->totalPickCount($array, $displayDate, 2);
-        $bg4 = $admin->tdColor($count_allData);
-        $table_foot .= "<th" . $bg4 . ">" . $count_allData . "</th>";
-        $table_foot .= "</tr></tfoot></table>";
+        $bg2_1 = $admin->tdColor($total_top_left);
+        $bg2_2 = $admin->tdColor($total_top_right);
+        $bg2_3 = $admin->tdColor($total_bottom_left);
+        $bg2_4 = $admin->tdColor($total_bottom_right);
+        $table_foot .= "<td>";
+        $table_foot .= "<table width=100% cellspacing=0 cellpadding=0>";
+        $table_foot .= "<tr>";
+        $table_foot .= "<td " . $bg2_1 . ">" . $total_top_left . "</td>";
+        $table_foot .= "<td " . $bg2_2 . ">" . $total_top_right . "</td>";
+        $table_foot .= "</tr>";
+        $table_foot .= "<tr>";
+        $table_foot .= "<td " . $bg2_3 . ">" . $total_bottom_left . "</td>";
+        $table_foot .= "<td " . $bg2_4 . ">" . $total_bottom_right . "</td>";
+        $table_foot .= "</tr></table>";
+        $table_foot .= "</td>";
+        $table_foot .= "</tr></tbody></table>";
 
         $data['title'] = "KPI Quad Report";
         $data['customer'] = $cust;
@@ -119,7 +174,6 @@ class QuadrantController extends BaseController
         return view('admin/display3', $data);
         }else{
             $top = "<html><head><meta charset='UTF-8'><title>KPI Tool</title></head><body>";
-    //  $top .="<p><strong>Type:</strong> ".ucfirst($type)."</p>";
      $top .="<p><strong>Pick/Putaway:</strong> ".ucfirst($mailset['docType'])."</p>";
      $top .="<p><strong>Customer:</strong> ".$cust."</p>";
      $top .="<p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
@@ -160,8 +214,6 @@ class QuadrantController extends BaseController
             $complete = new \DateTime($complete, new \DateTimeZone($data_time));
             $complete->modify('-1 hour');
             $complete = $complete->format('H:i');
-            // $complete->setTimeZone(new \DateTimeZone($data_time)); 
-            //var_dump($complete); exit;
             if (($data->picker == $picker) && ($start <= $complete) && ($complete <= $end)) {
                 if (($cust == 2) && ($data->new_type == 'cases')) {
                     $cases_count += abs($data->transaction_qty);
@@ -176,6 +228,51 @@ class QuadrantController extends BaseController
             }
         endforeach;
         $count = array('pallets' => $pallet_count, 'cases' => $cases_count, 'cases_on_pallet' => $cases_on_pallet, 'caselabel' => $case_labelled);
+        return $count;
+    }
+
+    public function timeCountPerInterval($allData, $start, $end, $data_time, $local_time, $date, $cust)
+    {
+        $start = $date . " " . $start;
+        $end = $date . " " . $end;
+        $end = new \DateTime($end, new \DateTimeZone($data_time));
+        if ($cust == 2) {
+            $end->setTimeZone(new \DateTimeZone($local_time));
+        }
+        $end->modify('-1 second');
+        $end = $end->format('H:i');
+
+        $start = new \DateTime($start, new \DateTimeZone($data_time));
+        if ($cust == 2) {
+            $start->setTimeZone(new \DateTimeZone($local_time));
+        }
+        $start->modify('-1 second');
+        $start = $start->format('H:i');
+        $count = [];
+        $all_count = 0;
+        $pallet_count = 0;
+        $cases_count = 0;
+        $cases_on_pallet = 0;
+        $case_labelled = 0;
+        foreach ($allData as $data):
+            $complete = $data->start_time;
+            $complete = new \DateTime($complete, new \DateTimeZone($data_time));
+            $complete->modify('-1 hour');
+            $complete = $complete->format('H:i');
+            if (($start <= $complete) && ($complete <= $end)) {
+                if (($cust == 2) && ($data->new_type == 'cases')) {
+                    $cases_count += abs($data->transaction_qty);
+                    
+                } elseif (($cust == 2) && ($data->new_type == 'pallet')) {
+                    $pallet_count++;
+                    $cases_on_pallet += abs($data->transaction_qty);
+                }
+                if(strtoupper(trim($data->caselabel)) != "*NONE"){
+                    $case_labelled += abs($data->transaction_qty);
+                }
+            }
+        endforeach;
+        $count = array('time_bottom_left' => $pallet_count, 'time_top_left' => $cases_count, 'time_bottom_right' => $cases_on_pallet, 'time_top_right' => $case_labelled);
         return $count;
     }
 

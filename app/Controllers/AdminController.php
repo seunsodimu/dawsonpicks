@@ -956,9 +956,9 @@ function sendMailIN() {
     
     public function tdColor($count)
     {
-        $color =  " style='background:red'";
+        $color =  " align='center' style='background:red'";
         if($count > 0){
-            $color =" style='background:green'";
+            $color =" align='center' style='background:green'";
         }
         return $color;
     }
