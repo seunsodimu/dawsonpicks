@@ -7,15 +7,58 @@ helper('date');
 
 <div class="container" style="margin-top:20px;">
     <div class="row">
+<div class="pull-right">
+Hello <?= session()->get('name') ?>, | <a href="<?= site_url('upload-summary') ?>">Upload Summary</a> | 
+                    <a href="<?= site_url('logout') ?>">Logout</a>
+</div>
+    </div>
+    <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">Admin Dashboard</div>
+                <div class="panel-heading">Sprout Four Square Report</div>
                 <div class="panel-body">
-                    <h1>Hello <?= session()->get('name') ?>,</h1>
-                    <div class="pull-right">
-                    <a href="<?= site_url('upload-summary') ?>">Upload Summary</a> | 
-                    <a href="<?= site_url('logout') ?>">Logout</a>
-                    </div>
+                    <form method="GET" id="displayform" action="<?= base_url('quad') ?>">
+                    <input type="hidden" name="type" value="view">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Local Time</label>
+                            <select name="localTime" class="form-control">
+<option value="America/Chicago" selected <?= (session()->get('dataTime')=='America/Chicago') ? " selected" : "" ?>>(GMT-06:00) Central Time (US & Canada)</option>
+<option value="America/Los_Angeles" <?= (session()->get('dataTime')=='America/Los_Angeles') ? " selected" : "" ?>>(GMT-08:00) Pacific Time (US & Canada)</option>
+<option value="America/Denver" <?= (session()->get('dataTime')=='America/Denver') ? " selected" : "" ?>>(GMT-07:00) Mountain Time (US & Canada)</option>
+<option value="America/Dawson_Creek" <?= (session()->get('dataTime')=='America/Dawson_Creek') ? " selected" : "" ?>>(GMT-07:00) Arizona</option>
+<option value="America/New_York" <?= (session()->get('dataTime')=='America/New_York') ? " selected" : "" ?>>(GMT-05:00) Eastern Time (US & Canada)</option>        
+                        </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Data Time</label>
+                            <select name="dataTime" class="form-control">
+<option value="America/New_York" <?= (session()->get('dataTime')=='America/New_York') ? " selected" : "" ?>>(GMT-05:00) Eastern Time (US & Canada)</option>               
+<option value="America/Los_Angeles" <?= (session()->get('dataTime')=='America/Los_Angeles') ? " selected" : "" ?>>(GMT-08:00) Pacific Time (US & Canada)</option>
+<option value="America/Denver" <?= (session()->get('dataTime')=='America/Denver') ? " selected" : "" ?>>(GMT-07:00) Mountain Time (US & Canada)</option>
+<option value="America/Dawson_Creek" <?= (session()->get('dataTime')=='America/Dawson_Creek') ? " selected" : "" ?>>(GMT-07:00) Arizona</option>
+<option value="America/Chicago" <?= (session()->get('dataTime')=='America/Chicago') ? " selected" : "" ?>>(GMT-06:00) Central Time (US & Canada)</option>
+
+                        </select>
+                        </div>
+                    </div><br/>
+<div class="form-group">
+    <label>Date to display</label>
+    <input type="date" name="displayDate" id="displayDate" class="form-control" value="<?= (!empty(session()->get('displayDate')))?session()->get('displayDate'): date('Y-m-d') ?>" required>
+</div>
+<div class="form-group">
+    <label>Interval</label>
+    <select name="intv" class="form-control"><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= ((session()->get('Interval')==60) || empty(session()->get('docType')))?"selected": "" ?>>1 hour</option></select>
+</div>
+<div class="form-group">
+    <label>Doc Type</label>
+    <select name="docType" class="form-control"><option value="Putaway" <?= (session()->get('docType')=="Putaway")?"selected": "" ?>>Putaway</option><option value="Pick" <?= ((session()->get('docType')=="Pick") || empty(session()->get('docType')))?"selected": "" ?>>Pick</option><option value="Pallet Checked In" <?= (session()->get('docType')=="Pallet Checked In")?"selected": "" ?>>Pallet Checked In</option><option value="Pallet Assembly" <?= (session()->get('docType')=="Pallet Assembly")?"selected": "" ?>>Pallet Assembly</option><option value="Move" <?= (session()->get('docType')=="Move")?"selected": "" ?>>Move</option></select>
+</div>
+<div class="form-group">
+    <input type="submit" id="submit-btn-view" value="Submit" class="btn btn-lg btn-success showSpinner" />
+    <!--<input type="reset" id="reset-btn-view" value="Reset" class="btn btn-lg btn-danger" />-->
+</div>
+                    </form>
                 </div>
             </div>
         </div>

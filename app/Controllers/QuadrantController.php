@@ -33,6 +33,9 @@ class QuadrantController extends BaseController
         $admin = new AdminController();
         $mailset = json_decode($mail_settings[0]->settings, true);
         $mailset['Interval'] = isset($this->request->getGet()['intv']) ? $this->request->getGet()['intv'] : $mailset['Interval'];
+        $mailset['docType'] = isset($this->request->getGet()['docType']) ? $this->request->getGet()['docType'] : $mailset['docType'];
+        $mailset['localTime'] = isset($this->request->getGet()['localTime']) ? $this->request->getGet()['localTime'] : $mailset['localTime'];
+        $mailset['dataTime'] = isset($this->request->getGet()['dataTime']) ? $this->request->getGet()['dataTime'] : $mailset['dataTime'];
         $array = $pick->getAllCasesPallets($displayDate, $type, $mailset['docType'], $cust);
         
         $times = $admin->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
@@ -47,7 +50,6 @@ class QuadrantController extends BaseController
         $table_head .= "<th>Picker Total</th>";
         $table_head .= "</tr></thead>";
         $table_body = "<tbody>";
-        $timestarts = [];
         $pickers = [];
         foreach ($array as $item) {
             if (!in_array($item->picker, $pickers)) {
@@ -168,7 +170,7 @@ class QuadrantController extends BaseController
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
         $data['layout'] = "";
-        $data['links'] = "https://dawson-reports.com/kpi/quad?type=view";
+        $data['links'] = base_url('quad')."?type=view";
         $data['table'] = $table_head . $table_body . $table_foot;
         $data['summary'] = "";
         if($this->request->getGet()['type'] == 'view'){
