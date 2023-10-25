@@ -74,7 +74,7 @@ class QuadrantController extends BaseController
                 $bg4 = $admin->tdColor($countx['caselabel']);
 
                 $table_body .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
-                $table_body .= "<table width=100% cellspacing=0 cellpadding=0 class='noborderst'>";
+                $table_body .= "<table width=100% cellspacing=0 cellpadding=0>";
                 $table_body .= "<tr>";
                 $table_body .= "<td " . $bg2 . ">" . $countx['cases'] . "</td>";
                 $table_body .= "<td " . $bg4 . ">" . $countx['caselabel'] . "</td>";
@@ -103,8 +103,8 @@ class QuadrantController extends BaseController
             $bg_2 = $admin->tdColor($picker_top_right);
             $bg_3 = $admin->tdColor($picker_bottom_left);
             $bg_4 = $admin->tdColor($picker_bottom_right);
-            $table_body .= "<td>";
-            $table_body .= "<table width=100% cellspacing=0 cellpadding=0 class='noborderst'>";
+            $table_body .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
+            $table_body .= "<table width=100% cellspacing=0 cellpadding=0>";
             $table_body .= "<tr>";
             $table_body .= "<td " . $bg_1 . ">" . $picker_top_left . "</td>";
             $table_body .= "<td " . $bg_2 . ">" . $picker_top_right . "</td>";
@@ -129,8 +129,8 @@ class QuadrantController extends BaseController
             $bg1_2 = $admin->tdColor($county['time_top_right']);
             $bg1_3 = $admin->tdColor($county['time_bottom_left']);
             $bg1_4 = $admin->tdColor($county['time_bottom_right']);
-            $table_foot .= "<td>";
-            $table_foot .= "<table width=100% cellspacing=0 cellpadding=0 class='noborderst'>";
+            $table_foot .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
+            $table_foot .= "<table width=100% cellspacing=0 cellpadding=0>";
             $table_foot .= "<tr>";
             $table_foot .= "<td " . $bg1_1 . ">" . $county['time_top_left'] . "</td>";
             $table_foot .= "<td " . $bg1_2 . ">" . $county['time_top_right'] . "</td>";
@@ -149,8 +149,8 @@ class QuadrantController extends BaseController
         $bg2_2 = $admin->tdColor($total_top_right);
         $bg2_3 = $admin->tdColor($total_bottom_left);
         $bg2_4 = $admin->tdColor($total_bottom_right);
-        $table_foot .= "<td>";
-        $table_foot .= "<table width=100% cellspacing=0 cellpadding=0>";
+        $table_foot .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
+        $table_foot .= "<table width=100% cellspacing=1 cellpadding=1 style='border: 1px solid'>";
         $table_foot .= "<tr>";
         $table_foot .= "<td " . $bg2_1 . ">" . $total_top_left . "</td>";
         $table_foot .= "<td " . $bg2_2 . ">" . $total_top_right . "</td>";
