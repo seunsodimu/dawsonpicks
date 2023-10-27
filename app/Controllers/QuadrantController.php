@@ -177,7 +177,7 @@ class QuadrantController extends BaseController
         return view('admin/display3', $data);
         }else{
             $top = "<html><head><meta charset='UTF-8'><title>KPI Tool</title></head><body>";
-     $top .="<p><strong>Pick/Putaway:</strong> Four Square</p><p><strong>Pick/Putaway:</strong> ".ucfirst($mailset['docType'])."</p>";
+     $top .="<p><strong>Type:</strong> Four Square</p><p><strong>Pick/Putaway:</strong> ".ucfirst($mailset['docType'])."</p>";
      $top .="<p><strong>Customer:</strong> ".$cust."</p>";
      $top .="<p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
      $top .="<p><strong>Live link: </strong>https://dawson-reports.com/kpi/quad?type=view&intv=60</p>";
