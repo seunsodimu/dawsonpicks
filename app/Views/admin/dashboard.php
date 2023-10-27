@@ -15,7 +15,7 @@ Hello <?= session()->get('name') ?>, | <a href="<?= site_url('upload-summary') ?
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">Sprout Four Square Report Admin</div>
+                <div class="panel-heading">Four Square Report (Sprout)</div>
                 <div class="panel-body">
                     <form method="GET" id="displayform" action="<?= base_url('quad') ?>">
                     <input type="hidden" name="type" value="view">
