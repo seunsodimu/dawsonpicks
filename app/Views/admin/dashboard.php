@@ -8,7 +8,7 @@ helper('date');
 <div class="container" style="margin-top:20px;">
     <div class="row">
 <div class="pull-right">
-Hello <?= session()->get('name') ?>, | <a href="<?= site_url('upload-summary') ?>">Upload Summary</a> | 
+Hello <?= session()->get('name') ?> | <a href="<?= site_url('upload-summary') ?>">Upload Summary</a> | 
                     <a href="<?= site_url('logout') ?>">Logout</a>
 </div>
     </div>
