@@ -1352,17 +1352,12 @@ if (($currentReport !== $previousReport) && ($count_allData > 0)) {
     $dompdf->render();
     $dompdf->stream();
     }elseif($this->request->getVar()['view'] == 'html'){
-
-        // $currentReport = json_encode($array, JSON_PRETTY_PRINT);
-        // $local_json = "assets/json/last_".$customer.$type.$docType.".json";
-        // $previousReport = file_exists($local_json) ? file_get_contents($local_json) : '';
-        // file_put_contents($local_json, $currentReport);
-
         $data['title'] = "KPI Report";
         $data['customer'] = $cust;
         $data['type'] = $type;
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
+        $data['links'] ="";
         $getVars = $this->request->getVar();
         $url_params ="";
         foreach($getVars as $key=>$value):
