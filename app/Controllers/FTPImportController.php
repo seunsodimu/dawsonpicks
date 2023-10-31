@@ -123,7 +123,7 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                         echo "not inserted";
                      }                                 
                  }
-                 echo $count." : ".$date5." :- ".$filename;
+                 echo $count." rows updated. Last pick at  ".$date5." : ".$time8;
                  $this->notifyAdmin("Uploaded ".$count." rows from ".$server_file, "developer@seun.me", "", "KPI Upload Details");
 
   }

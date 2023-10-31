@@ -185,9 +185,9 @@ class QuadrantController extends BaseController
      $bottom =     "</body></html>";
         $html = $top.$table_head.$table_body.$table_foot.$summary.$bottom;
      $subject = $cust." KPI report (Quadrant Display)";
-     $email_rec = "dennisb@dawsonlogistics.com";
-     $emails_recs = "seun.sodimu@gmail.com";
-     $admin->sendMailSMTP($email_rec, $subject, $html, $emails_recs); 
+     $email_rec = "brooksb@dawsonlogistics.com";
+     $emails_recs = "dennisb@dawsonlogistics.com, jason.mcpherson@dawsonlogistics.com, Donald.Garza@dawsonlogistics.com, willr@dawsonlogistics.com, mtorma@dawsonlogistics.com, developer@seun.me";
+    $admin->sendMailSMTP($email_rec, $subject, $html, $emails_recs); 
         }
     }
 
