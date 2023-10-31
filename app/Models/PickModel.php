@@ -85,12 +85,17 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
     }else{
      if($type=='pallet'){
       $builder->select('COUNT(picker) AS total');
-     }else{
+     }elseif($type=='cases'){
       $builder->select('SUM(ABS(transaction_qty)) AS total');
+     }else{
+      $builder->select('COUNT(picker) AS total');
      }
     }
-    
+    if($type!=""){
     $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'complete_time>='=>$start, 'complete_time<='=>$end, 'doc_type'=>$docType, 'cust_name'=>$cust, 'new_type'=>$type));
+    }else{
+      $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'complete_time>='=>$start, 'complete_time<='=>$end, 'doc_type'=>$docType, 'cust_name'=>$cust));
+    }
     $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
         return $data;
   }
@@ -105,11 +110,17 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
     }else{
       if($type=='pallet'){
         $builder->select('COUNT(picker) AS total');
-       }else{
+      }elseif($type=='cases'){
         $builder->select('SUM(ABS(transaction_qty)) AS total');
+       }else{
+        $builder->select('COUNT(picker) AS total');
        }
     }
+    if($type!=""){
     $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'doc_type'=>$docType, 'cust_name'=>$cust, 'new_type'=>$type));
+    }else{
+      $builder->where(array('picker'=>$picker, 'complete_date'=>$date, 'doc_type'=>$docType, 'cust_name'=>$cust));
+    }
     $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
         return $data;
   }

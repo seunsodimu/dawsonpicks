@@ -31,7 +31,7 @@ $server_file = "/logimaxedi/Speedo/picking/".$filename;
 $file_list = ftp_nlist($ftp_conn, "/logimaxedi/Speedo/picking/");
 //var_dump($file_list); exit;
 if (in_array($server_file, $file_list)) { 
-     echo "Found file ". $local_file."...<br>";
+     echo "Found file ". $server_file."...<br>";
 if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
   {
   echo "Successfully written to ".$local_file."...<br>";
@@ -82,19 +82,19 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                     $importData_arr[$i]['upload_by'] = 'scheduled';
 
                     ////pallet and cases
-                     if(str_contains($filedata[14], 'Speedo')){
-                        if((str_contains($filedata[17], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
+                     if(str_contains($filedata[16], 'Speedo')){
+                        if((str_contains($filedata[17], 'ASM')) || (str_contains($filedata[17], 'PALLET'))){
                             $importData_arr[$i]['new_type'] = 'pallet';
                         }else{
                             $importData_arr[$i]['new_type'] = 'cases';
                         }
                        }
                        elseif(str_contains($filedata[16], 'Sprout')){
-                        //   if(trim($filedata[15])[-1] == 'P'){
+                           if((trim($filedata[17])[-1] == 'P') || (trim($filedata[13]) == 'Putaway')){
                                $importData_arr[$i]['new_type'] = 'pallet';
-                    //   }else{
-                     //      $importData_arr[$i]['new_type'] = 'cases';
-                    //   }
+                       }else{
+                          $importData_arr[$i]['new_type'] = 'cases';
+                      }
                        }
                        else{
                            $importData_arr[$i]['new_type'] = 'cases';

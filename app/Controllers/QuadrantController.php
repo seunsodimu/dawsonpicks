@@ -163,7 +163,7 @@ class QuadrantController extends BaseController
         $table_foot .= "</tr></table>";
         $table_foot .= "</td>";
         $table_foot .= "</tr></tbody></table>";
-
+        $summary =$admin->tableSummary($pickers, $mailset['Interval'], $mailset['FromTIme'], $mailset['ToTIme'], $displayDate, '', $mailset['docType'], $cust);
         $data['title'] = "KPI Quad Report";
         $data['customer'] = $cust;
         $data['type'] = "Four Square";
@@ -172,7 +172,7 @@ class QuadrantController extends BaseController
         $data['layout'] = "";
         $data['links'] = base_url('quad')."?type=view";
         $data['table'] = $table_head . $table_body . $table_foot;
-        $data['summary'] = "";
+        $data['summary'] = $summary;
         if($this->request->getGet()['type'] == 'view'){
         return view('admin/display3', $data);
         }else{
@@ -181,8 +181,9 @@ class QuadrantController extends BaseController
      $top .="<p><strong>Customer:</strong> ".$cust."</p>";
      $top .="<p><strong>Date: </strong>".date('m/d/Y', strtotime($displayDate))."</p>";
      $top .="<p><strong>Live link: </strong>https://dawson-reports.com/kpi/quad?type=view&intv=60</p>";
+     
      $bottom =     "</body></html>";
-        $html = $top.$table_head.$table_body.$table_foot.$bottom;
+        $html = $top.$table_head.$table_body.$table_foot.$summary.$bottom;
      $subject = $cust." KPI report (Quadrant Display)";
      $email_rec = "dennisb@dawsonlogistics.com";
      $emails_recs = "seun.sodimu@gmail.com";
