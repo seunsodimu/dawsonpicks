@@ -82,19 +82,19 @@ if (ftp_get($ftp_conn, $local_file, $server_file, FTP_ASCII))
                     $importData_arr[$i]['upload_by'] = 'scheduled';
 
                     ////pallet and cases
-
                      if(str_contains($filedata[14], 'Speedo')){
-                        if((str_contains($filedata[15], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
+                        if((str_contains($filedata[17], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
                             $importData_arr[$i]['new_type'] = 'pallet';
                         }else{
                             $importData_arr[$i]['new_type'] = 'cases';
                         }
-                       }elseif(str_contains($filedata[14], 'Sprout')){
-                           if(trim($filedata[15])[-1] == 'P'){
-                               $importData_arr[$i]['new_type'] = 'pallet';
-                       }else{
-                           $importData_arr[$i]['new_type'] = 'cases';
                        }
+                       elseif(str_contains($filedata[16], 'Sprout')){
+                        //   if(trim($filedata[15])[-1] == 'P'){
+                               $importData_arr[$i]['new_type'] = 'pallet';
+                    //   }else{
+                     //      $importData_arr[$i]['new_type'] = 'cases';
+                    //   }
                        }
                        else{
                            $importData_arr[$i]['new_type'] = 'cases';
@@ -257,7 +257,7 @@ $email->send();
  $ftp_userpass = "Tech5633";
  //$ftp_server = "172.28.208.10";
  $ftp_server = "199.19.210.20"; //public
- $ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", ""));
+ $ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", "", "Dawson KPI Upload Issue"));
  $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
  $filename = $this->request->getGet('fn');
  $local_file = "assets/archive/".$filename;
@@ -313,7 +313,7 @@ $email->send();
                       $importData_arr[$i]['ship_to_rec_from'] = $filedata[17];
                       $importData_arr[$i]['transaction_qty'] = $filedata[18];
                      $importData_arr[$i]['upload_by'] = 'scheduled';
-                     if((str_contains($filedata[15], 'ASM')) || (str_contains($filedata[15], 'PALLET'))){
+                     if((str_contains($filedata[17], 'ASM')) || (str_contains($filedata[17], 'PALLET'))){
                          $importData_arr[$i]['new_type'] = 'pallet';
                      }else{
                          $importData_arr[$i]['new_type'] = 'cases';
