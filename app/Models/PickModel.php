@@ -88,7 +88,7 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
      }elseif($type=='cases'){
       $builder->select('SUM(ABS(transaction_qty)) AS total');
      }else{
-      $builder->select('COUNT(picker) AS total');
+      $builder->select('SUM(ABS(transaction_qty)) AS total');
      }
     }
     if($type!=""){
@@ -113,7 +113,7 @@ public function viewDisplay($sDate, $type, $docType, $cust='Speedo C/O Dawson Lo
       }elseif($type=='cases'){
         $builder->select('SUM(ABS(transaction_qty)) AS total');
        }else{
-        $builder->select('COUNT(picker) AS total');
+        $builder->select('SUM(ABS(transaction_qty)) AS total');
        }
     }
     if($type!=""){
