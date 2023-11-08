@@ -120,17 +120,23 @@ class TimeBlockController extends BaseController
 
     public function getPickerPickHitsInTimeArray($array, $picker, $time_array, $date)
     {
-        $hits = 0;
+        $hits = 0;// var_dump($time_array); exit();
+        $times = [];
         foreach($array as $row){
             if($row->picker == $picker){
                 foreach($time_array as $time){
                     if(($row->complete_time >= $time['start']) && ($row->complete_time <= $time['end']) && ($row->complete_date == $date)){
-                        $hits++;
+                       
+                        // break complete time by : and get the hour
+                        $hour = explode(":", $row->complete_time)[0];
+                        array_push($times, $hour);
                     }
                 }
             }
         }
-        return $hits;
+        //count unique times
+        $time_array = array_count_values($times);
+        return count($time_array);
     }
 
     public function getCustomerName($id)

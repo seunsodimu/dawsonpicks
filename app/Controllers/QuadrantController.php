@@ -10,6 +10,7 @@ use App\Models\UserModel;
 use CodeIgniter\I18n\Time;
 use Exception;
 use App\Controllers\AdminController;
+use App\Controllers\TimeBlockController;
 
 
 class QuadrantController extends BaseController
@@ -29,6 +30,7 @@ class QuadrantController extends BaseController
         $type = "Cases";
         $cust = "Sprout Foods, Inc";
         $pick = new PickModel();
+        $timeblock = new TimeBlockController();
         $mail_settings = $pick->mailReportSettings();
         $admin = new AdminController();
         $mailset = json_decode($mail_settings[0]->settings, true);
@@ -167,14 +169,30 @@ class QuadrantController extends BaseController
         $table_foot .= "</td>";
         $table_foot .= "</tr></tbody></table>";
         //$summary =$this->tableSummary($pickers, $mailset['Interval'], $mailset['FromTIme'], $mailset['ToTIme'], $displayDate, '', $mailset['docType'], $cust);
+        $hour_array = $timeblock->getTimeArray(60);
         $summary = "<br><br><br>";
         $summary .= "<table style='margin-top: 80px' border=1 cellspacing=0 cellpadding=0 width='50%'><thead><tr align='center'><th>Selector</th><th align='center'>Avg/hr</th><th align='center'>Hours</th><th align='center'>Total Picks</th></tr></thead><tbody>";
         foreach($pickersSummary as $ps):
+            $pickerHoursWorked = $timeblock->getPickerPickHitsInTimeArray($array, $ps['picker'], $hour_array, $displayDate);
+            $avg_top_left = ($ps['time_top_left']!=0) ? round(($ps['time_top_left'] / $pickerHoursWorked), 1) : 0;
+            $avg_bottom_left = ($ps['time_bottom_left']!= 0) ? round(($ps['time_bottom_left'] / $pickerHoursWorked), 1) : 0;
+            $avg_top_right = ($ps['time_top_right']!= 0) ? round(($ps['time_top_right'] / $pickerHoursWorked), 1) : 0;
+            $avg_bottom_right = ($ps['time_bottom_right']!= 0) ? round(($ps['time_bottom_right'] / $pickerHoursWorked), 1) : 0;
             $summary .= "<tr>";
             $summary .= "<td>".$ps['picker']."</td>";
-            $summary .= "<td align='center'>".$ps['time_top_left']."</td>";
-            $summary .= "<td align='center'>".$ps['count']."</td>";
-            $summary .= "<td>";
+            $summary .= "<td align='center'>";
+            $summary .= "<table width=100% cellspacing=0 cellpadding=0>";
+            $summary .= "<tr>";
+            $summary .= "<td align='center'>".$avg_top_left."</td>";
+            $summary .= "<td align='center'>".$avg_top_right."</td>";
+            $summary .= "</tr>";
+            $summary .= "<tr>";
+            $summary .= "<td align='center'>".$avg_bottom_left."</td>";
+            $summary .= "<td align='center'>".$avg_bottom_right."</td>";
+            $summary .= "</tr></table>";
+            $summary .= "</td>";
+            $summary .= "<td align='center'>".$pickerHoursWorked."</td>";
+            $summary .= "<td align='center'>";
             $summary .= "<table width=100% cellspacing=0 cellpadding=0>";
             $summary .= "<tr>";
             $summary .= "<td align='center'>".$ps['time_top_left']."</td>";
