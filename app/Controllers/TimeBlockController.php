@@ -124,7 +124,7 @@ class TimeBlockController extends BaseController
         foreach($array as $row){
             if($row->picker == $picker){
                 foreach($time_array as $time){
-                    if($row->start_time = $time['start'] && $row->complete_time <= $time['end'] && $row->complete_date == $date){
+                    if(($row->complete_time >= $time['start']) && ($row->complete_time <= $time['end']) && ($row->complete_date == $date)){
                         $hits++;
                     }
                 }
