@@ -42,6 +42,7 @@ class QuadrantController extends BaseController
         $data['table'] = "";
         $table_head = "<table id='rowtbl3' width=100% border='1' cellspacing=0 cellpadding=10><thead><tr><th></th>";
         $timeheads = [];
+        $pickersSummary = [];
         foreach ($times as $time):
             $table_head .= "<th>" . $time['start'] . "</th>";
             $timehead = array('time' => $time['start'], 'count' => 0, 'time_top_right' => 0, 'time_top_left' => 0, 'time_bottom_right' => 0, 'time_bottom_left' => 0 );
@@ -117,6 +118,8 @@ class QuadrantController extends BaseController
             $table_body .= "</tr></table>";
             $table_body .= "</td>";
             $table_body .= "</tr>";
+            $pickerSummary = array('picker' => $picks, 'count' => $time_count, 'time_top_right' => $picker_top_right, 'time_top_left' => $picker_top_left, 'time_bottom_right' => $picker_bottom_right, 'time_bottom_left' => $picker_bottom_left );
+            array_push($pickersSummary, $pickerSummary);
         endforeach;
         //$table_body .= "</tbody>";
         $table_foot = "<tr><td>Time Total</td>";
@@ -163,7 +166,29 @@ class QuadrantController extends BaseController
         $table_foot .= "</tr></table>";
         $table_foot .= "</td>";
         $table_foot .= "</tr></tbody></table>";
-        $summary =$admin->tableSummary($pickers, $mailset['Interval'], $mailset['FromTIme'], $mailset['ToTIme'], $displayDate, '', $mailset['docType'], $cust);
+        //$summary =$this->tableSummary($pickers, $mailset['Interval'], $mailset['FromTIme'], $mailset['ToTIme'], $displayDate, '', $mailset['docType'], $cust);
+        $summary = "<br><br><br>";
+        $summary .= "<table style='margin-top: 80px' border=1 cellspacing=0 cellpadding=0 width='50%'><thead><tr align='center'><th>Selector</th><th align='center'>Avg/hr</th><th align='center'>Hours</th><th align='center'>Total Picks</th></tr></thead><tbody>";
+        foreach($pickersSummary as $ps):
+            $summary .= "<tr>";
+            $summary .= "<td>".$ps['picker']."</td>";
+            $summary .= "<td align='center'>".$ps['time_top_left']."</td>";
+            $summary .= "<td align='center'>".$ps['count']."</td>";
+            $summary .= "<td>";
+            $summary .= "<table width=100% cellspacing=0 cellpadding=0>";
+            $summary .= "<tr>";
+            $summary .= "<td align='center'>".$ps['time_top_left']."</td>";
+            $summary .= "<td align='center'>".$ps['time_top_right']."</td>";
+            $summary .= "</tr>";
+            $summary .= "<tr>";
+            $summary .= "<td align='center'>".$ps['time_bottom_left']."</td>";
+            $summary .= "<td align='center'>".$ps['time_bottom_right']."</td>";
+            $summary .= "</tr></table>";
+            $summary .= "</td>";
+            $summary .= "</tr>";
+        endforeach;
+        $summary .= "</tbody></table>";
+        
         $data['title'] = "KPI Quad Report";
         $data['customer'] = $cust;
         $data['type'] = "Four Square";
@@ -279,6 +304,72 @@ class QuadrantController extends BaseController
         endforeach;
         $count = array('time_bottom_left' => $pallet_count, 'time_top_left' => $cases_count, 'time_bottom_right' => $cases_on_pallet, 'time_top_right' => $case_labelled);
         return $count;
+    }
+    public function tableSummary($pickers, $interval, $fTime, $tTime, $sDate, $type, $docType, $cust)
+    {
+        $total_avg = 0;
+        $totpik = 0;
+        $block_total =0;
+        
+    $display1 = "";
+    $total_hrs=0;
+    $total_avg =0;
+    $display1 .="<table style='margin-top: 80px' border=1 cellspacing=0 cellpadding=0 width='50%'><thead><tr align='center'><th>Selector</th><th align='center'>Avg/hr</th><th align='center'>Hours</th><th align='center'>Total Picks</th></tr></thead><tbody>";
+    $tot_hr = 0;
+    $tot_pic = 0;
+    foreach($pickers as $picker){
+        $display1 .="<tr>";
+        $display1 .="<td>".$picker."</td>";
+        $res = $this->pickerHoursWorked($picker, $interval, $fTime, $tTime, $sDate, $type, $docType, $cust);
+        $display1 .="<td align='center'>".$res['avg_hr']."</td>";
+        $display1 .="<td align='center'>".$res['hours']."</td>";
+        $tot_hr = $tot_hr + $res['hours'];
+        $tot_pic = $tot_pic + $res['total'];
+        $display1 .="<td align='center'>".$res['total']."</td>";
+        $display1 .="</tr>";
+    }
+    if(($tot_pic>0) && ($tot_hr > 0)){
+    $avg_per_hr = $tot_pic / $tot_hr;
+    $avg_per_hr = round($avg_per_hr, 2);
+}else{
+    $avg_per_hr =0;
+}
+    $display1 .="<tr><td><strong>Totals</strong></td><td align='center'><strong>".$avg_per_hr."</strong></td><td align='center'><strong>".$tot_hr."</strong></td><td align='center'><strong>".$tot_pic."</strong></td></tr></tbody></table>";
+        return $display1;
+    }
+
+    public function pickerHoursWorked($picker, $intvl, $start, $end, $date, $type, $docType, $cust="Speedo C/O Dawson Logistics")
+    {
+        $pick = new PickModel();
+        $intvl_to_hour = 60 /$intvl; 
+        $time_worked = 0;
+        $start = new \DateTime($start);
+        $end = new \DateTime($end);
+        $current = clone $start;
+         while ($current <= $end) { 
+            $floor = $current->format("G:i");
+            $ceil = $current->modify("+".$intvl." minutes");
+            $pick_count = $pick->countPicks($picker, $date, $floor, $ceil->format("G:i"), $type, $docType, $cust);
+            if($pick_count[0]->total >=1 ){
+                $time_worked++;
+            }
+         }
+        $pickDay = $pick->totalPickerCountPerDay($picker, $date, $type, $docType, $cust); //var_dump($pickDay); exit;
+        $reponse['hours'] = round($time_worked / $intvl_to_hour, 1); //var_dump($intvl_to_hour); exit;
+        $reponse['avg_hr'] = ($reponse['hours']!=0) ? round(($pickDay[0]->total / $reponse['hours']), 1): 0;
+        $reponse['total'] = $pickDay[0]->total;
+
+         return $reponse;
+    }
+
+    public function pickerTimeBlockPicks()
+    {
+        $pick = new PickModel();
+        $interval = $this->request->getGet('interval');
+        $start = $this->request->getGet('start');
+        $end = $this->request->getGet('end');
+        $pickers = $pick->distinctPickersBetweenDates($start, $end);
+        $picks = $pick
     }
 
 }

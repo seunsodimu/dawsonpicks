@@ -15,11 +15,15 @@
 <p><strong>Type: </strong><?= ucfirst($type) ?></p>
 <p><strong>Document Type: </strong><?= ucfirst($docType) ?></p>
 <p><strong>Report Date: </strong> <?= $date ?></p>
+<?php if($description != ""): ?>
+<p><strong>Description: </strong> <?= $description ?></p>
+<?php endif; ?>
 <p><a href="<?= base_url() ?>/admin"> <i class="fa fa-home"></i> Home</a>
 <?php if($layout != ""): ?>
     | <a href="<?= $layout ?>"><i class="fa fa-recycle"></i> Rotate</a>
 <?php endif; ?>
 <?php if($links != ""): ?>
+    | <a href="<?= $links ?>&intv=5"><i class="fa fa-hourglass"></i> 5mins Interval</a>
     | <a href="<?= $links ?>&intv=10"><i class="fa fa-hourglass"></i> 10mins Interval</a>
     | <a href="<?= $links ?>&intv=15"><i class="fa fa-hourglass"></i> 15mins Interval</a>
     | <a href="<?= $links ?>&intv=30"><i class="fa fa-hourglass"></i> 30mins Interval</a>

@@ -63,6 +63,7 @@ $routes->get("kpi-data", "KpiController::getData");
 $routes->get("mail-report-rev", "AdminController::mailReportInv");
 $routes->get("mail-report2", "AdminController::mailReport2");
 $routes->get("quad", "QuadrantController::getQuadrant");
+$routes->get("picker-time-block", "TimeBlockController::pickerTimeBlockPicks");
 /*
  * --------------------------------------------------------------------
  * Additional Routing

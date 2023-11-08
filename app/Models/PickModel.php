@@ -271,5 +271,36 @@ public function countPickSelector($picker, $date1, $date2, $start, $end, $type, 
       return $data;
 }
   
+public function distinctPickersBetweenDates($start_date, $end_Date)
+{
+  $builder = $this->db->table('pick_upload_temp');
+  $builder->select('picker');
+  $builder->distinct();
+  $builder->where('complete_date >=', $start_date);
+  $builder->where('complete_date <=', $end_Date);
+  $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
+      return $data;
+}
+
+public function getAllDataBetweenDates($start_date, $end_date, $customer='', $docType='', $new_type='')
+{
+  $builder = $this->db->table('pick_upload_temp');
+  $builder->select('picker, start_date, start_time, complete_date, complete_time, transaction_qty, new_type');
+  $builder->where('start_date >=', $start_date);
+  $builder->where('start_date <=', $end_date);
+  if($customer!=''){
+    $builder->where('cust_name', $customer);
+  }
+  if($docType!=''){
+    $builder->where('doc_type', $docType);
+  }
+  if($new_type!=''){
+    $builder->where('new_type', $new_type);
+  }
+  $builder->orderBy('picker ASC, complete_time DESC');
+  $data = $builder->get()->getResult(); //var_dump($this->db->getLastQuery()); exit;
+      return $data;
+}
+
 
 }
