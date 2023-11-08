@@ -362,14 +362,4 @@ class QuadrantController extends BaseController
          return $reponse;
     }
 
-    public function pickerTimeBlockPicks()
-    {
-        $pick = new PickModel();
-        $interval = $this->request->getGet('interval');
-        $start = $this->request->getGet('start');
-        $end = $this->request->getGet('end');
-        $pickers = $pick->distinctPickersBetweenDates($start, $end);
-        $picks = $pick
-    }
-
 }
