@@ -198,6 +198,7 @@ class QuadrantController extends BaseController
         $data['links'] = base_url('quad')."?type=view";
         $data['table'] = $table_head . $table_body . $table_foot;
         $data['summary'] = $summary;
+        $data['description'] = '';
         if($this->request->getGet()['type'] == 'view'){
         return view('admin/display3', $data);
         }else{
