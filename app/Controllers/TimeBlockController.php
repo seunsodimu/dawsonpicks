@@ -125,8 +125,10 @@ class TimeBlockController extends BaseController
         foreach($array as $row){
             if($row->picker == $picker){
                 foreach($time_array as $time){
-                    if(($row->complete_time >= $time['start']) && ($row->complete_time <= $time['end']) && ($row->complete_date == $date)){
-                       
+                   // echo  "Date: ".$date." | Array time: ".$time['start']." | Picker: ".$row->picker; //." | Complete date: ".$row->complete_date." | ";
+                    if((strtotime($row->complete_time) >= strtotime($time['start'])) && (strtotime($row->complete_time) <= strtotime($time['end'])) && ($row->complete_date == $date)){
+                       // $show = true;
+                       // echo " | Complete time: ".$row->complete_time."<br>";
                         // break complete time by : and get the hour
                         $hour = explode(":", $row->complete_time)[0];
                         array_push($times, $hour);
