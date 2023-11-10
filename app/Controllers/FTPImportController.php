@@ -13,8 +13,8 @@ class FTPImportController extends BaseController
     public function index() {
        // connect and login to FTP server 
 
-$ftp_username = "SPEEDO";
-$ftp_userpass = "Tech5633";
+$ftp_username = getenv('DAWSON_FTP_USER');
+$ftp_userpass = getenv('DAWSON_FTP_PASS');
 $ftp_server = !empty($this->request->getGet('access')) ? "172.28.208.10" : "199.19.210.20";
 //$ftp_server = "172.28.208.10"; //local
 //$ftp_server = "199.19.210.20"; //public
@@ -353,4 +353,48 @@ $email->send();
  // close connection
  ftp_close($ftp_conn);
      }
+
+     public function getFTPFileList(){
+$ftp_username = getenv('DAWSON_FTP_USER');
+$ftp_userpass = getenv('DAWSON_FTP_PASS');
+$ftp_server = !empty($this->request->getGet('access')) ? "172.28.208.10" : "199.19.210.20";
+
+$ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", "", "Dawson KPI Upload Issue"));
+$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+ftp_pasv($ftp_conn, true) or die("Passive mode failed");
+$file_list = ftp_nlist($ftp_conn, "/logimaxedi/Speedo/picking/");
+// close connection
+ftp_close($ftp_conn);
+return $file_list;
+     }
+
+     public function getFTPFileListCache() {
+        // Load the cache library
+        $cache = \Config\Services::cache();
+    
+        // Define a unique key for your cached file list
+        $cacheKey = 'ftp_file_list';
+        $file_list = $cache->get($cacheKey);
+    
+        // Check if file list is already in cache and not expired
+        if ($file_list !== null) {
+            return $file_list;
+        }
+            $file_list = $this->getFTPFileList();
+    
+        // Store file list in cache with 1-hour expiration
+        $cache->save($cacheKey, $file_list, 3600);
+    
+        return $file_list;
+    }
+
+    public function showFileList()
+    { //var_dump('show'); exit;
+        $file_list = $this->getFTPFileListCache();
+        foreach($file_list as $file){
+            echo $file."<br>";
+        }
+    }
+    
+    
 }
