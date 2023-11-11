@@ -382,19 +382,108 @@ return $file_list;
         }
             $file_list = $this->getFTPFileList();
     
-        // Store file list in cache with 1-hour expiration
-        $cache->save($cacheKey, $file_list, 3600);
+        // Calculate the remaining time until the top of the next hour
+    $current_time = new \DateTime();
+    $top_next_hour = (clone $current_time)->modify('+1 hour')->setTime((int) $current_time->format('H') + 1, 0, 0);
+    $expiration = $top_next_hour->getTimestamp() - $current_time->getTimestamp();
+
+    // Store file list in cache with expiration set to the top of the next hour
+    $cache->save($cacheKey, $file_list, $expiration);
     
         return $file_list;
     }
 
     public function showFileList()
     { //var_dump('show'); exit;
-        $file_list = $this->getFTPFileListCache();
-        foreach($file_list as $file){
-            echo $file."<br>";
-        }
+        // $file_list = $this->getFTPFileListCache();
+        // echo "Last entry is: ".end($file_list);
+        // foreach($file_list as $file){
+        //     echo $file."<br>";
+        // }
+        $dir = "assets/archive/";
+        $files2 = scandir($dir);
+        // foreach($files2 as $file){
+        //     echo $file.". Last modified: ".date("F d Y H:i:s.", filemtime($dir.$file));
+        //     echo "<br>";
+        // }
+        $recent = end($files2);
+        $modified_time = filemtime($dir.$recent);
+      //  echo $recent.". Last modified: ".date("F d Y H:i:s.", $modified_time);
+        $local_file = "assets/archive/".$recent.".csv";
+        // Set headers to trigger the download
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="'.basename($local_file).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($local_file));
+    
+        // Clear output buffer
+        ob_clean();
+        flush();
+    
+        // Read the file and output its contents
+        readfile($local_file);
+        exit;
     }
+
+    public function downloadLastCSVFromFTP() {
+        // FTP credentials and server
+        $ftp_username = getenv('DAWSON_FTP_USER');
+        $ftp_userpass = getenv('DAWSON_FTP_PASS');
+        $ftp_server = !empty($this->request->getGet('access')) ? "172.28.208.10" : "199.19.210.20";
+    
+        // Establish FTP connection and login
+        $ftp_conn = ftp_connect($ftp_server) or die($this->notifyAdmin($_SERVER['SERVER_ADDR']." Could not connect to ".$ftp_server, "seun.sodimu@gmail.com", "", "Dawson KPI Upload Issue"));
+        $login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);
+        ftp_pasv($ftp_conn, true) or die("Passive mode failed");
+    
+        // Retrieve file list from FTP server
+        $file_list = ftp_nlist($ftp_conn, "/logimaxedi/Speedo/picking/");
+    
+        // Check if file list is empty
+        if (empty($file_list)) {
+            ftp_close($ftp_conn);
+            die("No files found on FTP server.");
+        }
+    
+        // Get the last file from the list
+        $last_file = end($file_list);
+    
+        // Define the path for local and server file
+        $local_file = "assets/archive/" . basename($last_file);
+        $server_file = "/logimaxedi/Speedo/picking/" . $last_file;
+    
+        // Download the file
+        if (ftp_get($ftp_conn, $local_file, $server_file, FTP_BINARY)) {
+            echo "Successfully written to $local_file\n";
+        } else {
+            echo "There was a problem\n";
+        }
+    
+        // Close FTP connection
+        ftp_close($ftp_conn);
+    
+        // Set headers to trigger the download
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="'.basename($local_file).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($local_file));
+    
+        // Clear output buffer
+        ob_clean();
+        flush();
+    
+        // Read the file and output its contents
+        readfile($local_file);
+        exit;
+    }
+    
+    
     
     
 }
