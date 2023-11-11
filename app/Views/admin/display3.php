@@ -22,6 +22,7 @@
 <?php if($layout != ""): ?>
     | <a href="<?= $layout ?>"><i class="fa fa-recycle"></i> Rotate</a>
 <?php endif; ?>
+<p><label> <input type="checkbox" id="hide7am" <?= ($FromTIme == '7:00') ? 'checked' : '' ?>> Hide Columns before 7am</label></p>
 <?php if($links != ""): ?>
     | <a href="<?= $links ?>&intv=5"><i class="fa fa-hourglass"></i> 5mins Interval</a>
     | <a href="<?= $links ?>&intv=10"><i class="fa fa-hourglass"></i> 10mins Interval</a>

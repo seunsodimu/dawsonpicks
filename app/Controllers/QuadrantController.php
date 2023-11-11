@@ -221,10 +221,10 @@ class QuadrantController extends BaseController
             $total_pick_bottom_left += $ps['time_bottom_left'];
             $total_pick_bottom_right += $ps['time_bottom_right'];
         endforeach;
-        $total_avg_top_left = round(($total_pick_top_left / $total_hours), 1);
-        $total_avg_top_right = round(($total_pick_top_right / $total_hours), 1);
-        $total_avg_bottom_left = round(($total_pick_bottom_left / $total_hours), 1);
-        $total_avg_bottom_right = round(($total_pick_bottom_right / $total_hours), 1);
+        $total_avg_top_left = ($total_pick_top_left!=0) ? round(($total_pick_top_left / $total_hours), 1): 0;
+        $total_avg_top_right = ($total_pick_top_left!=0) ? round(($total_pick_top_right / $total_hours), 1): 0;
+        $total_avg_bottom_left = ($total_pick_top_left!=0) ? round(($total_pick_bottom_left / $total_hours), 1): 0;
+        $total_avg_bottom_right = ($total_pick_top_left!=0) ? round(($total_pick_bottom_right / $total_hours), 1): 0;
         $summary .= "<tr>";
         $summary .= "<td><strong>Totals</strong></td>";
         $summary .= "<td align='left'>";
@@ -262,6 +262,7 @@ class QuadrantController extends BaseController
         $data['table'] = $table_head . $table_body . $table_foot;
         $data['summary'] = $summary;
         $data['description'] = '';
+        $data['FromTIme'] = $mailset['FromTIme'];
         if($this->request->getGet()['type'] == 'view'){
         return view('admin/display3', $data);
         }else{

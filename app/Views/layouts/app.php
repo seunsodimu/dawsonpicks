@@ -85,7 +85,7 @@
   <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#rowtbl1').DataTable( {
+  $('#rowtbl1').DataTable( {
         iDisplayLength: 200,
         fixedColumns: {
             leftColumns: 1
@@ -198,6 +198,17 @@ $("#reset-btn-view").click(function(){
     window.location.href = "<?= base_url('download-data-file') ?>";
     
   });
+  //if hide7am is checked, add FromTime =07:00 to the url else remove FromTime from url
+  $("#hide7am").change(function(){
+    var currentUrl = window.location.href;
+    var newUrl = "";
+    if(this.checked){
+      newUrl = currentUrl + "&FromTime=07:00"; 
+    }else{
+      newUrl = currentUrl.replace("&FromTime=07:00", "");
+    }
+    window.location.href = newUrl;
+  })
 
 
 
