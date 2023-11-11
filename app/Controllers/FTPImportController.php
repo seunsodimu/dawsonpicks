@@ -402,12 +402,13 @@ return $file_list;
         // }
         $dir = "assets/archive/";
         $files2 = scandir($dir);
+        $recent = end($files2);
+        $modified_time = filemtime($dir.$recent);
         // foreach($files2 as $file){
         //     echo $file.". Last modified: ".date("F d Y H:i:s.", filemtime($dir.$file));
         //     echo "<br>";
         // }
-        $recent = end($files2);
-        $modified_time = filemtime($dir.$recent);
+        
       //  echo $recent.". Last modified: ".date("F d Y H:i:s.", $modified_time);
         $local_file = "assets/archive/".$recent;
         // Set headers to trigger the download

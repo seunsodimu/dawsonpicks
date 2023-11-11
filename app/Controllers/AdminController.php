@@ -23,6 +23,7 @@ class AdminController extends BaseController
         $customers = new CustomerModel();
         $data['pickers'] = $pick->distinctPickers();
         $data['customers'] = $customers->getCustomer();
+        $data['lastUpdate'] = $this->lastUpdate();
         $data['title'] = "";
         return view("admin/dashboard", $data);
     }
@@ -1613,6 +1614,38 @@ public function calculatePickerStats($data, $picker, $date)
     );
     return $data;
 }
+  private function lastUpdate()
+  {    
+    $dir = "assets/archive/";
+    $files2 = scandir($dir);
+    $recent = end($files2);
+    $modified_time = date("F d Y h:i:s", filemtime($dir.$recent));
+    return $modified_time;
 
+  }
+
+  public function downloadRecentRawData()
+    { 
+        $dir = "assets/archive/";
+        $files2 = scandir($dir);
+        $recent = end($files2);
+        $local_file = "assets/archive/".$recent;
+        // Set headers to trigger the download
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="'.basename($local_file).'.csv"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($local_file));
+    
+        // Clear output buffer
+        ob_clean();
+        flush();
+    
+        // Read the file and output its contents
+        readfile($local_file);
+        exit;
+    }
 
 }

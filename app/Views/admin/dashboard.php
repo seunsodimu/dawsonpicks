@@ -6,10 +6,14 @@ helper('date');
 <?= $this->section("body") ?>
 
 <div class="container" style="margin-top:20px;">
-    <div class="row">
+    <div class="row" style="padding: 10px">
 <div class="pull-right">
-Hello <?= session()->get('name') ?> | <a href="<?= site_url('upload-summary') ?>">Upload Summary</a> | 
-                    <a href="<?= site_url('logout') ?>">Logout</a>
+Hello <?= session()->get('name') ?> 
+| <a href="<?= site_url('upload-summary') ?>">Upload Summary</a> 
+| <a href="javascript:void(0)" id="DataFileDownload">Download Recent Data File</a>
+                   | <a href="<?= site_url('logout') ?>">Logout</a><br>
+                     <i>Last update at <?= $lastUpdate ?></i>
+                    <br>
 </div>
     </div>
     <div class="row">
@@ -48,7 +52,7 @@ Hello <?= session()->get('name') ?> | <a href="<?= site_url('upload-summary') ?>
 </div>
 <div class="form-group">
     <label>Interval</label>
-    <select name="intv" class="form-control"><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= ((session()->get('Interval')==60) || empty(session()->get('docType')))?"selected": "" ?>>1 hour</option></select>
+    <select name="intv" class="form-control"><option value="5" <?= (session()->get('Interval')==5)?"selected": "" ?>>5 mins</option><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= ((session()->get('Interval')==60) || empty(session()->get('docType')))?"selected": "" ?>>1 hour</option></select>
 </div>
 <div class="form-group">
     <label>Doc Type</label>

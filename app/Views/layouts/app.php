@@ -192,7 +192,12 @@ $("#reset-btn-view").click(function(){
     $("#displayform").find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
     console.log('show');
 });
-  
+  $("#DataFileDownload").click(function(){
+    $("#DataFileDownload").attr("disabled", true);
+    //redirect to base_url('download-data-file') 
+    window.location.href = "<?= base_url('download-data-file') ?>";
+    
+  });
 
 
 

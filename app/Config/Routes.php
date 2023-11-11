@@ -65,6 +65,7 @@ $routes->get("mail-report2", "AdminController::mailReport2");
 $routes->get("quad", "QuadrantController::getQuadrant");
 $routes->get("picker-time-block", "TimeBlockController::pickerTimeBlockPicks");
 $routes->get("test-filelist", "FTPImportController::showFileList");
+$routes->get('download-data-file', 'AdminController::downloadRecentRawData');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
