@@ -203,9 +203,9 @@ $("#reset-btn-view").click(function(){
     var currentUrl = window.location.href;
     var newUrl = "";
     if(this.checked){
-      newUrl = currentUrl + "&FromTime=07:00"; 
+      newUrl = currentUrl + "&FromTIme=07:00"; 
     }else{
-      newUrl = currentUrl.replace("&FromTime=07:00", "");
+      newUrl = currentUrl.replace("&FromTIme=07:00", "");
     }
     window.location.href = newUrl;
   })
