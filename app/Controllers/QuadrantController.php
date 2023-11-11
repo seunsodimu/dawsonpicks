@@ -38,6 +38,8 @@ class QuadrantController extends BaseController
         $mailset['docType'] = isset($this->request->getGet()['docType']) ? $this->request->getGet()['docType'] : $mailset['docType'];
         $mailset['localTime'] = isset($this->request->getGet()['localTime']) ? $this->request->getGet()['localTime'] : $mailset['localTime'];
         $mailset['dataTime'] = isset($this->request->getGet()['dataTime']) ? $this->request->getGet()['dataTime'] : $mailset['dataTime'];
+        $mailset['FromTIme'] = isset($this->request->getGet()['FromTIme']) ? $this->request->getGet()['FromTIme'] : $mailset['FromTIme'];
+        $mailset['ToTIme'] = isset($this->request->getGet()['ToTIme']) ? $this->request->getGet()['ToTIme'] : $mailset['ToTIme'];
         $array = $pick->getAllCasesPallets($displayDate, $type, $mailset['docType'], $cust);
         
         $times = $admin->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
@@ -293,7 +295,7 @@ class QuadrantController extends BaseController
         if ($cust == 2) {
             $start->setTimeZone(new \DateTimeZone($local_time));
         }
-        $start->modify('-1 second');
+       // $start->modify('-1 second');
         $start = $start->format('H:i');
         $count = [];
         $all_count = 0;
