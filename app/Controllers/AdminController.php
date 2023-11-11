@@ -853,6 +853,7 @@ function sendMailIN() {
         $data['layout'] = base_url()."/mail-report2?".$url_params;
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
+        $data['description'] = "";
         return view("admin/display3", $data);
     }else{
            $html = $top;
@@ -1368,6 +1369,7 @@ if (($currentReport !== $previousReport) && ($count_allData > 0)) {
         $data['layout'] = base_url()."/mail-report-rev?".$url_params;
         $data['table'] = $table_head.$table_body.$table_foot;
         $data['summary'] = $summary;
+        $data['description'] = "";
         return view("admin/display3", $data);
     }
     else{
