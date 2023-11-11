@@ -409,11 +409,11 @@ return $file_list;
         $recent = end($files2);
         $modified_time = filemtime($dir.$recent);
       //  echo $recent.". Last modified: ".date("F d Y H:i:s.", $modified_time);
-        $local_file = "assets/archive/".$recent.".csv";
+        $local_file = "assets/archive/".$recent;
         // Set headers to trigger the download
         header('Content-Description: File Transfer');
         header('Content-Type: application/csv');
-        header('Content-Disposition: attachment; filename="'.basename($local_file).'"');
+        header('Content-Disposition: attachment; filename="'.basename($local_file).'.csv"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
