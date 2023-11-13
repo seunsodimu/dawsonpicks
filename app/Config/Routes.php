@@ -63,6 +63,7 @@ $routes->get("kpi-data", "KpiController::getData");
 $routes->get("mail-report-rev", "AdminController::mailReportInv");
 $routes->get("mail-report2", "AdminController::mailReport2");
 $routes->get("quad", "QuadrantController::getQuadrant");
+$routes->get("quad2", "QuadrantController::getQuadrant2");
 $routes->get("picker-time-block", "TimeBlockController::pickerTimeBlockPicks");
 $routes->get("test-filelist", "FTPImportController::showFileList");
 $routes->get('download-data-file', 'AdminController::downloadRecentRawData');
