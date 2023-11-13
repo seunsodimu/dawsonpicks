@@ -40,6 +40,7 @@ class QuadrantController extends BaseController
         $mailset['dataTime'] = isset($this->request->getGet()['dataTime']) ? $this->request->getGet()['dataTime'] : $mailset['dataTime'];
         $mailset['FromTIme'] = isset($this->request->getGet()['FromTIme']) ? $this->request->getGet()['FromTIme'] : $mailset['FromTIme'];
         $mailset['ToTIme'] = isset($this->request->getGet()['ToTIme']) ? $this->request->getGet()['ToTIme'] : $mailset['ToTIme'];
+        $mailset['creditMultiplier'] = isset($this->request->getGet()['labelCreditMultiplier']) ? $this->request->getGet()['creditMultiplier'] : $mailset['labelCreditMultiplier'];
         $array = $pick->getAllCasesPallets($displayDate, $type, $mailset['docType'], $cust);
         
         $times = $admin->getBetweenTimes($mailset['FromTIme'], $mailset['ToTIme'], $mailset['Interval']);
@@ -56,13 +57,13 @@ class QuadrantController extends BaseController
         $table_head .= "</tr></thead>";
         $table_body = "<tbody>";
         $pickers = [];
-        foreach ($array as $item) {
+        foreach ($array as $item):
             if (!in_array($item->picker, $pickers)) {
                 $pickers[] = $item->picker;
             }
-        }
+        endforeach;
         $table_body = "<tbody>";
-        $timestarts = [];
+        
         foreach ($pickers as $picks):
             $table_body .= "<tr><td>" . $picks . "</td>";
             $time_count = 0;
@@ -70,6 +71,7 @@ class QuadrantController extends BaseController
             $picker_top_right = 0;
             $picker_bottom_left = 0;
             $picker_bottom_right = 0;
+            $labelCredit = 0;
             foreach ($times as $time):
                 $countx = $this->pickerCountPerInterval($array, $picks, $time['start'], $time['end'], $mailset['dataTime'], $mailset['localTime'], $displayDate, 2);
                 $count = $countx['cases'] + $countx['pallets'];
@@ -78,8 +80,20 @@ class QuadrantController extends BaseController
                 $bg1 = $admin->tdColor($countx['pallets']);
                 $bg2 = $admin->tdColor($countx['cases']);
                 $bg3 = $admin->tdColor($countx['cases_on_pallet']);
+                if($countx['caselabel']!=0){
+                    $labelCredit += $countx['caselabel'] * $mailset['labelCreditMultiplier'];
+                }
+                $intervalToSec = $mailset['Interval'] * 60;
+                if($countx['caselabel'] == 0){
+                    if($labelCredit > $intervalToSec){
+                    $bg4 = " align='center' style='background:yellow'";
+                    $labelCredit = $labelCredit - $intervalToSec;
+                    }else{
+                        $bg4 = $admin->tdColor($countx['caselabel']);
+                    }
+                }else{
                 $bg4 = $admin->tdColor($countx['caselabel']);
-
+                }
                 $table_body .= "<td style='padding: 0 0 0 0; margin: 0 0 0 0'>";
                 $table_body .= "<table width=100% cellspacing=0 cellpadding=0>";
                 $table_body .= "<tr>";
@@ -263,6 +277,7 @@ class QuadrantController extends BaseController
         $data['summary'] = $summary;
         $data['description'] = '';
         $data['FromTIme'] = $mailset['FromTIme'];
+        $data['ToTIme'] = $mailset['ToTIme'];
         if($this->request->getGet()['type'] == 'view'){
         return view('admin/display3', $data);
         }else{

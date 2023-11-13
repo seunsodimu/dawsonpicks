@@ -210,6 +210,17 @@ $("#reset-btn-view").click(function(){
     window.location.href = newUrl;
   })
 
+  $("#hide6pm").change(function(){
+    var currentUrl = window.location.href;
+    var newUrl = "";
+    if(this.checked){
+      newUrl = currentUrl + "&ToTIme=18:00"; 
+    }else{
+      newUrl = currentUrl.replace("&FToTIme=18:00", "");
+    }
+    window.location.href = newUrl;
+  })
+
 
 
  $("#reportType").change(function(){
