@@ -46,13 +46,30 @@ Hello <?= session()->get('name') ?>
                         </select>
                         </div>
                     </div><br/>
+                    <div class="row">
+<div class="col-md-6">
+<label> <input type="checkbox" id="hide7amcol" name="FromTIme" value="07:00"> Hide Columns before 7am</label>
+</div>
+<div class="col-md-6">
+<label> <input type="checkbox" id="hide6pmcol" name="ToTIme" value="18:00"> Hide Columns after 6pm</label>
+</div>
+
+                    </div>
+                    <br>
+<div class="row">
+    <div class="col-md-6">
+    <label>Interval</label>
+    <select name="intv" class="form-control"><option value="5" <?= (session()->get('Interval')==5)?"selected": "" ?>>5 mins</option><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= (session()->get('Interval')==60) ?"selected": "" ?>>1 hour</option></select>
+    </div>
+    <div class="col-md-6">
+    <label>Labelling Multiplier</label>
+    <select name="creditMultiplier" class="form-control"><option value="5">5 Secs</option><option value="10">10 Secs</option><option value="15">15 Secs</option><option value="30">30 Secs</option><option value="60">1 hour</option></select>
+    </div>
+</div>
+<br>
 <div class="form-group">
     <label>Date to display</label>
     <input type="date" name="displayDate" id="displayDate" class="form-control" value="<?= (!empty(session()->get('displayDate')))?session()->get('displayDate'): date('Y-m-d') ?>" required>
-</div>
-<div class="form-group">
-    <label>Interval</label>
-    <select name="intv" class="form-control"><option value="5" <?= (session()->get('Interval')==5)?"selected": "" ?>>5 mins</option><option value="10" <?= (session()->get('Interval')==10)?"selected": "" ?>>10 mins</option><option value="15" <?= (session()->get('Interval')==15)?"selected": "" ?>>15 mins</option><option value="30"  <?= (session()->get('Interval')==30)?"selected": "" ?>>30 mins</option><option value="60" <?= ((session()->get('Interval')==60) || empty(session()->get('docType')))?"selected": "" ?>>1 hour</option></select>
 </div>
 <div class="form-group">
     <label>Doc Type</label>
