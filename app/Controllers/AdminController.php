@@ -1228,6 +1228,8 @@ public function mailReportTest()
         $customer = isset($this->request->getVar()['cust']) ? $this->request->getVar()['cust'] : 1;
         $mailset['dataTime'] = isset($this->request->getVar()['dataTime']) ? $this->request->getVar()['dataTime'] : $mailset['dataTime'];
         $mailset['localTime'] = isset($this->request->getVar()['localTime']) ? $this->request->getVar()['localTime'] : $mailset['localTime'];
+        $mailset['FromTIme'] = isset($this->request->getVar()['FromTIme']) ? $this->request->getVar()['FromTIme'] : $mailset['FromTIme'];
+        $mailset['ToTIme'] = isset($this->request->getVar()['ToTIme']) ? $this->request->getVar()['ToTIme'] : $mailset['ToTIme'];
 //set session variables
 $getdata = [
     'displayDate'=>$displayDate,
@@ -1360,6 +1362,8 @@ if (($currentReport !== $previousReport) && ($count_allData > 0)) {
         $data['date'] = $displayDate;
         $data['docType'] = $mailset['docType'];
         $data['links'] ="";
+        $data['FromTIme'] = $mailset['FromTIme'];
+        $data['ToTIme'] = $mailset['ToTIme'];
         $getVars = $this->request->getVar();
         $url_params ="";
         foreach($getVars as $key=>$value):
