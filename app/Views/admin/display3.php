@@ -13,7 +13,7 @@
 <div class="row" style="padding-left:50px; padding-right: 50px">
 <div class="col-sm-12">
     <div class="col-md-3">
-    <p><strong>Customer: </strong> <?= $customer ?></p>
+    <p><strong>Customer-: </strong> <?= $customer ?></p>
     </div>
     <div class="col-md-3">
     <p><strong>Type: </strong><?= ucfirst($type) ?></p>
